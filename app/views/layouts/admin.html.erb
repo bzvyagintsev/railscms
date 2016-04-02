@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rails CMS</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <%= csrf_meta_tags %>
+</head>
+
+<body>
+    <%= render 'admin/layouts/header' %>
+        <div class="col-md-3">
+            <div class="list-group">
+                <%= link_to 'Панель управления', admin_root_path, class: "list-group-item" %>
+                    <%= link_to 'Страницы', admin_pages_path, class: "list-group-item" %>
+                        <%= link_to 'Настройки', admin_settings_path, class: "list-group-item" %>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="container-fluid">
+                <% flash.each do |type, content| %>
+                    <% if content.respond_to?('each') 
+        content.each do |item| %>
+                        <%= render 'layouts/alert', 
+                type: type,
+                content: item %>
+                            <% end %>
+                                <% else %>
+                                    <%= render 'layouts/alert', 
+                type: type,
+                content: content %>
+                                        <% end %>
+                                            <% end %>
+                                                <%= yield %>
+                                                    <%= render 'admin/layouts/footer' %>
+            </div>
+        </div>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<h1>Страницы</h1>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Страницы</h3>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Дата создания
+                    </th>
+                    <th>
+                        Действия
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <% @pages.each do |p| %>
+                    <tr>
+                        <td>
+                            <%= p.id %>
+                        </td>
+                        <td>
+                            <p>
+                                <%= p.title %>
+                            </p>
+                        </td>
+                        <td>
+                            <%= p.created_at %>
+                        </td>
+                        <td>
+                            <%= link_to 'Открыть', admin_page_path(p) %>
+                        </td>
+                        <td>
+                            <%= link_to 'Редактировать', edit_admin_page_path(p) %>
+                        </td>
+                        <td>
+                            <%= button_to 'Удалить', admin_page_path(p), method: :delete, class: 'btn-link' %>
+                        </td>
+                    </tr>
+                    <% end %>
+            </table>
+        </div>
+        <%= link_to 'Новая страница', new_admin_page_path, class: 'btn btn-primary' %>
+    </div>
+</div>

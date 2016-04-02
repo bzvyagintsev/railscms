@@ -1,0 +1,15 @@
+<%= form_tag("/admin/settings", :method => "put", class: "form-horizontal") do %>
+    <% @settings.each do |setting| %>
+        <div class="form-group">
+            <%= label_tag(setting.var, setting.var, class: 'col-md-2 control-label' ) %>
+                <div class="col-md-10">
+                    <%= text_field_tag("settings[#{setting.var}]", setting.value, class: "form-control") %>
+                </div>
+        </div>
+        <% end %>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <%= submit_tag "Сохранить", class: 'btn btn-primary pull-right' %>
+                </div>
+            </div>
+            <% end %>

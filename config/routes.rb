@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  
+ 
+  mount Ckeditor::Engine => '/ckeditor'
+  namespace :admin do
+    root "static_pages#dashboard"
+    resources :pages
+    get 'settings' => 'my_settings#index', as: :settings
+    put 'settings' => 'my_settings#update'
+  end
+
+  resources :pages, only: [:show, :index]
+
+  root "pages#index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

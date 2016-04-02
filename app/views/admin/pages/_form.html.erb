@@ -1,0 +1,33 @@
+<%= form_for [:admin, @page], html: {class: "form-horizontal"} do |f| %>
+    <% if @page.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+            <h4><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h4>
+            <ul>
+                <% @page.errors.full_messages.each do |message| %>
+                    <li>
+                        <%= message %>
+                    </li>
+                    <% end %>
+            </ul>
+        </div>
+        <% end %>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Название</label>
+                <div class="col-md-10">
+                    <%= f.text_field :title, class: 'form-control' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Текст</label>
+                <div class="col-md-10">
+                    <%= f.cktext_area :body %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <%= button_tag(type: 'submit', class: 'btn btn-primary pull-right') do %>
+                        <i class=""></i> Отправить
+                        <% end %>
+                </div>
+            </div>
+            <% end %>

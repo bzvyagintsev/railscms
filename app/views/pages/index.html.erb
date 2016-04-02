@@ -1,0 +1,13 @@
+<h1>Страницы</h1>
+<p>
+    <%= notice %>
+</p>
+<div>
+    <% @pages.each do |p| %>
+        <div>
+            <p>
+                <%= p.title %>
+            </p>
+        </div>
+        <% end %>
+</div>

@@ -21,6 +21,17 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'friendly_id', '~> 5.1.0'
+gem 'babosa'
+gem 'ckeditor'
+gem "mini_magick"
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem "gretel"
+gem 'meta-tags'
+gem 'sitemap_generator'
+gem 'whenever', require: false
+gem "rails-settings-cached", "~> 0.4.0"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
