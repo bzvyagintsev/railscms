@@ -1,15 +1,35 @@
 <%= form_tag("/admin/settings", :method => "put", class: "form-horizontal") do %>
-    <% @settings.each do |setting| %>
-        <div class="form-group">
-            <%= label_tag(setting.var, setting.var, class: 'col-md-2 control-label' ) %>
-                <div class="col-md-10">
-                    <%= text_field_tag("settings[#{setting.var}]", setting.value, class: "form-control") %>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#seo">SEO</a></li>
+        <li><a data-toggle="tab" href="#mail">Mail</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="seo" class="tab-pane fade in active">
+            <h3>Настройки SEO</h3>
+            <% @seo_settings.each do |setting| %>
+                <div class="form-group">
+                    <%= label_tag(setting.first, setting.first, class: 'col-md-2 control-label' ) %>
+                        <div class="col-md-10">
+                            <%= text_field_tag("settings[#{setting.first}]", setting.second, class: "form-control") %>
+                        </div>
                 </div>
+                <% end %>
         </div>
-        <% end %>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <%= submit_tag "Сохранить", class: 'btn btn-primary pull-right' %>
+        <div id="mail" class="tab-pane fade">
+            <h3>Настройки почты</h3>
+            <% @mail_settings.each do |setting| %>
+                <div class="form-group">
+                    <%= label_tag(setting.first, setting.first, class: 'col-md-2 control-label' ) %>
+                        <div class="col-md-10">
+                            <%= text_field_tag("settings[#{setting.first}]", setting.second, class: "form-control") %>
+                        </div>
                 </div>
-            </div>
-            <% end %>
+                <% end %>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <%= submit_tag "Сохранить", class: 'btn btn-primary pull-right' %>
+        </div>
+    </div>
+    <% end %>

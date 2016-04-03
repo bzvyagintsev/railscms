@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
 
   def prepare_meta_tags(options={})
     site_name   = "Rails CMS"
-    title       = MySettings.seo_title
-    description = MySettings.seo_description
+    title       = MySettings['seo.title']
+    description = MySettings['seo.description']
     image       = options[:image] || "your-default-image-url"
     current_url = request.url
 
