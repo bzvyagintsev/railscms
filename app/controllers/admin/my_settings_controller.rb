@@ -1,6 +1,7 @@
 class Admin::MySettingsController < Admin::BaseController
 	def index
 		@settings = MySettings.unscoped
+		@base_settings = MySettings.get_all('base.')
 		@seo_settings = MySettings.get_all('seo.')
 		@mail_settings = MySettings.get_all('mail.')
 	end

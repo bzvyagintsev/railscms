@@ -4,7 +4,19 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   namespace :admin do
     root "static_pages#dashboard"
-    resources :pages
+    
+    resources :pages do
+     collection do
+        delete 'destroy_multiple'
+      end
+    end
+
+    resources :pages_categories do
+     collection do
+        delete 'destroy_multiple'
+      end
+    end    
+
     get 'settings' => 'my_settings#index', as: :settings
     put 'settings' => 'my_settings#update'
   end

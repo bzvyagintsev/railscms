@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402162217) do
+ActiveRecord::Schema.define(version: 20160404195612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,26 @@ ActiveRecord::Schema.define(version: 20160402162217) do
     t.string   "title"
     t.text     "body"
     t.string   "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "pages_category_id"
+    t.string   "seo_title"
+    t.text     "seo_description"
   end
+
+  create_table "pages_categories", force: :cascade do |t|
+    t.string  "title"
+    t.integer "parent_id"
+    t.integer "lft",                        null: false
+    t.integer "rgt",                        null: false
+    t.integer "depth",          default: 0, null: false
+    t.integer "children_count", default: 0, null: false
+    t.string  "slug"
+  end
+
+  add_index "pages_categories", ["lft"], name: "index_pages_categories_on_lft", using: :btree
+  add_index "pages_categories", ["parent_id"], name: "index_pages_categories_on_parent_id", using: :btree
+  add_index "pages_categories", ["rgt"], name: "index_pages_categories_on_rgt", using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",                   null: false

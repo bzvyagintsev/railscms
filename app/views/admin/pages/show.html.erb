@@ -1,7 +1,7 @@
-<p>
+<h1>
     <%= @page.title %>
-</p>
+</h1>
 <p>
-    <%= @page.body %>
+    <%= raw @page.body %>
 </p>
 <%= link_to 'Назад', admin_pages_path %>

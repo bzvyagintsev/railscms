@@ -1,10 +1,22 @@
 <%= form_tag("/admin/settings", :method => "put", class: "form-horizontal") do %>
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#seo">SEO</a></li>
+        <li class="active"><a data-toggle="tab" href="#base">Основные</a></li>
+        <li><a data-toggle="tab" href="#seo">SEO</a></li>
         <li><a data-toggle="tab" href="#mail">Mail</a></li>
     </ul>
     <div class="tab-content">
-        <div id="seo" class="tab-pane fade in active">
+        <div id="base" class="tab-pane fade in active">
+            <h3>Основные настройки</h3>
+            <% @base_settings.each do |setting| %>
+                <div class="form-group">
+                    <%= label_tag(setting.first, setting.first, class: 'col-md-2 control-label' ) %>
+                        <div class="col-md-10">
+                            <%= text_field_tag("settings[#{setting.first}]", setting.second, class: "form-control") %>
+                        </div>
+                </div>
+                <% end %>
+        </div>
+        <div id="seo" class="tab-pane fade">
             <h3>Настройки SEO</h3>
             <% @seo_settings.each do |setting| %>
                 <div class="form-group">

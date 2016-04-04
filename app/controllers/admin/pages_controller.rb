@@ -5,7 +5,7 @@ module Admin
 		before_action :set_page, only: [:show, :edit, :update, :destroy]
 
 		def index
-			@pages = Page.all
+			@pages = Page.all.paginate(:per_page => 2, :page => params[:page])
 		end
 
 		def show
@@ -55,10 +55,26 @@ module Admin
 		    end
 		end
 
+		def destroy_multiple
+			if params[:pages].present?
+				Page.destroy(params[:pages])
+
+				respond_to do |format|
+				 format.html { redirect_to admin_pages_path, :flash => { danger: "Страницы удалены"}  }
+				 format.json { head :no_content }
+				end
+			else
+				respond_to do |format|
+				 format.html { redirect_to admin_pages_path, :flash => { danger: "Вы не выбрали ни одной страницы"}  }
+				 format.json { head :no_content }
+				end
+			end
+		end
+
 		private
 
 		def page_params
-			params.require(:page).permit(:title, :body, :slug)
+			params.require(:page).permit(:title, :pages_category_id, :body, :slug, :seo_title, :seo_description)
 		end
 
 			# Поиск страницы по friendly_id и редирект с id на friendly_id
