@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
  
   mount Ckeditor::Engine => '/ckeditor'
   namespace :admin do
@@ -15,6 +14,18 @@ Rails.application.routes.draw do
      collection do
         delete 'destroy_multiple'
       end
+    end
+
+    resources :products do
+     collection do
+        delete 'destroy_multiple'
+      end
+    end
+
+    resources :products_categories do
+     collection do
+        delete 'destroy_multiple'
+      end
     end    
 
     get 'settings' => 'my_settings#index', as: :settings
@@ -22,6 +33,8 @@ Rails.application.routes.draw do
   end
 
   resources :pages, only: [:show, :index]
+  resources :products, only: [:show, :index]
+  resources :products_categories, only: [:show, :index]
 
   root "pages#index"
 

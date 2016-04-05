@@ -1,12 +1,12 @@
-<%= form_tag destroy_multiple_admin_pages_path, method: :delete do %>
+<%= form_tag destroy_multiple_admin_products_path, method: :delete do %>
     <div class="row">
         <div class="col-md-6">
-            <h1 style="margin-top: 0px;">Страницы</h1>
+            <h1 style="margin-top: 0px;">Товары</h1>
         </div>
         <div class="col-md-6">
             <div class="form-inline pull-right">
                 <div class="form-group">
-                    <%= link_to new_admin_page_path, class: 'btn btn-primary' do %>
+                    <%= link_to new_admin_product_path, class: 'btn btn-primary' do %>
                         <i class="fa fa-plus"></i>
                         <% end %>
                 </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-list"></i> Страницы</h3>
+            <h3 class="panel-title"><i class="fa fa-list"></i> Товары</h3>
         </div>
         <div class="panel-body">
             <div class="table-responsive">
@@ -31,13 +31,16 @@
                             #
                         </th>
                         <th>
+                            Обложка
+                        </th>
+                        <th>
                             Название
                         </th>
                         <th>
                             Категория
                         </th>
                         <th>
-                            Дата создания
+                            Цена
                         </th>
                         <th>
                             Статус
@@ -46,29 +49,32 @@
                             На сайте
                         </th>
                     </tr>
-                    <% @pages.each do |p| %>
+                    <% @products.each do |p| %>
                         <tr>
                             <td>
-                                <%= check_box_tag "pages[]", p.id, checked = false, class: 'check' %>
+                                <%= check_box_tag "products[]", p.id, checked = false, class: 'check' %>
                             </td>
                             <td>
                                 <%= p.id %>
                             </td>
                             <td>
+                                <%= image_tag p.cover.url(:admin_thumb) if p.cover? %>
+                            </td>
+                            <td>
                                 <p>
-                                    <%= link_to p.title, edit_admin_page_path(p) %>
-                                        <!-- <%= link_to p.title, admin_page_path(p) %> -->
+                                    <%= link_to p.title, edit_admin_product_path(p) %>
+                                        <!-- <%= link_to p.title, admin_product_path(p) %> -->
                                 </p>
                             </td>
                             <td>
-                                <% if p.pages_category.present? %>
-                                    <%= p.pages_category.title %>
+                                <% if p.products_category.present? %>
+                                    <%= p.products_category.title %>
                                         <% else %>
                                             <p>Без категории</p>
                                             <% end %>
                             </td>
                             <td>
-                                <%= p.created_at %>
+                                <%= number_to_currency_rub(p.price) %>
                             </td>
                             <td>
                                 <%= active_status(p.active) %>
@@ -76,12 +82,12 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <%= link_to page_path(p), class: 'btn btn-success' do  %>
+                                        <%= link_to product_path(p), class: 'btn btn-success' do  %>
                                             <i class="fa fa-eye"></i>
                                             <% end %>
                                     </div>
                                     <!-- <div class="form-group">
-                                        <%= link_to edit_admin_page_path(p), class: 'btn btn-success' do  %>
+                                        <%= link_to edit_admin_product_path(p), class: 'btn btn-success' do  %>
                                             <i class="fa fa-pencil"></i>
                                             <% end %>
                                     </div> -->
@@ -92,7 +98,7 @@
                 </table>
             </div>
             <div class="form-group">
-                <%= will_paginate @pages, renderer: BootstrapPagination::Rails  %>
+                <%= will_paginate @products, renderer: BootstrapPagination::Rails  %>
             </div>
         </div>
     </div>

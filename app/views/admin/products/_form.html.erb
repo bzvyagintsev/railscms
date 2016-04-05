@@ -1,9 +1,9 @@
-<%= form_for [:admin, @page], html: {class: "form-horizontal"} do |f| %>
-    <% if @page.errors.any? %>
+<%= form_for [:admin, @product], html: {class: "form-horizontal"} do |f| %>
+    <% if @product.errors.any? %>
         <div class="alert alert-danger" role="alert">
-            <h4><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h4>
+            <h4><%= pluralize(@product.errors.count, "error") %> prohibited this page from being saved:</h4>
             <ul>
-                <% @page.errors.full_messages.each do |message| %>
+                <% @product.errors.full_messages.each do |message| %>
                     <li>
                         <%= message %>
                     </li>
@@ -25,21 +25,33 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Категория</label>
+                        <label for="" class="col-md-2 control-label">Цена</label>
                         <div class="col-md-10">
-                            <%= f.select :pages_category_id, PagesCategory.all.collect {|c| [ c.title, c.id ] }, {include_blank: true}, class: 'form-control' %>
+                            <%= f.text_field :price, class: 'form-control' %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Текст</label>
+                        <label for="" class="col-md-2 control-label">Категория</label>
                         <div class="col-md-10">
-                            <%= f.cktext_area :body %>
+                            <%= f.select :products_category_id, ProductsCategory.all.collect {|c| [ c.title, c.id ] }, {include_blank: true}, class: 'form-control' %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">Описание</label>
+                        <div class="col-md-10">
+                            <%= f.text_area :description, class: 'form-control' %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">Обложка</label>
+                        <div class="col-md-10">
+                            <%= f.file_field :cover %>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Опубликовать</label>
                         <div class="col-md-10">
-                            <%= f.check_box :active, checked: true %>
+                            <%= f.check_box :active, checked: true  %>
                         </div>
                     </div>
                 </div>
@@ -48,13 +60,13 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">SEO title</label>
                         <div class="col-md-10">
-                            <%= f.text_field :seo_title, class: 'form-control' %>
+                            <!-- f.text_field :seo_title, class: 'form-control'  -->
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">SEO description</label>
                         <div class="col-md-10">
-                            <%= f.text_area :seo_description, class: 'form-control' %>
+                            <!-- f.text_area :seo_description, class: 'form-control' -->
                         </div>
                     </div>
                 </div>

@@ -74,7 +74,7 @@ module Admin
 		private
 
 		def page_params
-			params.require(:page).permit(:title, :pages_category_id, :body, :slug, :seo_title, :seo_description)
+			params.require(:page).permit(:title, :pages_category_id, :body, :active, :slug, :seo_title, :seo_description)
 		end
 
 			# Поиск страницы по friendly_id и редирект с id на friendly_id
