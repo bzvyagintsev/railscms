@@ -1,0 +1,17 @@
+<span class='label
+    <%= 
+    case content.to_sym 
+    when :progress
+        'label-primary'
+    when :paid
+        'label-info'
+    when :completed
+        'label-success'
+    when :canceled
+        'label-danger'
+    else 
+        'alert-info'
+    end
+    %>'>
+        <%= content %>
+    </span>

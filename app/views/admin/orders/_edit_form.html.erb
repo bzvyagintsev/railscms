@@ -1,0 +1,122 @@
+<% breadcrumb :admin_orders %>
+<h1>Изменить заказ</h1>
+<%= form_tag admin_order_path(@order), :method => "put", multipart: true, class: "form-horizontal" do |f| %>
+    <% if @order.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+            <h4><%= pluralize(@order.errors.count, "error") %> prohibited this page from being saved:</h4>
+            <ul>
+                <% @order.errors.full_messages.each do |message| %>
+                    <li>
+                        <%= message %>
+                    </li>
+                    <% end %>
+            </ul>
+        </div>
+        <% end %>
+ <div class="form-group">
+    <label for="" class="col-md-2 control-label">ФИО</label>
+	<div class="col-md-10">
+        <%= text_field_tag 'order[name]', @order.name, class: 'form-control' %>
+	</div>
+</div>
+
+ <div class="form-group">
+    <label for="" class="col-md-2 control-label">Email</label>
+	<div class="col-md-10">
+        <%= text_field_tag 'order[email]', @order.email, class: 'form-control' %>
+	</div>
+</div>
+ <div class="form-group">
+    <label for="" class="col-md-2 control-label">Статус</label>
+	<div class="col-md-10">
+        		<td><%= select_tag 'order[status]', options_from_collection_for_select(Order.statuses, 'first', 'first', @order.status), class: 'form-control' %></td>
+	</div>
+</div>
+
+<!--  <div class="form-group">
+    <label for="" class="col-md-2 control-label">Товар</label>
+	<div class="col-md-5">
+       <%= select_tag 'line_item', options_from_collection_for_select(Product.all, 'id', 'title'), prompt: 'Выберите товар', class: 'form-control' %>
+	</div>
+	<div class="col-md-5">
+        <%= text_field_tag 'quantity', '1', class: 'form-control' %>
+	</div>
+</div> -->
+
+<h2>Товары</h2> 
+
+<table id="lineItems" class="table table-hover">
+	<tr>
+		<th>Название</th>
+		<th>Количество</th>
+		<th>Добавить</th>
+	</tr>
+<% if @order.line_items.count == 0 %>
+	<tr data-index="-1" >
+		<td><%= select_tag 'line_items[products[product_0[product_id]]]', options_from_collection_for_select(Product.all, 'id', 'title'), prompt: 'Выберете товар', class: 'form-control', id: 'product_id' %></td>
+		<td><%= text_field_tag 'line_items[products[product_0[quantity]]]', 1, class: 'form-control', id: 'quantity'  %></td>
+		<td id='lineItemAction'><button type="button" id="addLineItem" class="btn btn-primary"><i class="fa fa-plus"></i></button></td>
+	</tr>
+<% end %>
+<% @order.line_items.each_with_index do |i, index| %>
+	<tr data-index="<%= index %>">
+		<td><%= select_tag 'line_items[products[product_' + index.to_s + '[product_id]]]', options_from_collection_for_select(Product.all, 'id', 'title', selected: i.product.id), prompt: 'Выберете товар', class: 'form-control', id: 'product_id' %></td>
+		<td><%= text_field_tag 'line_items[products[product_' + index.to_s + '[quantity]]]', i.quantity, class: 'form-control', id: 'quantity'  %></td>
+		<td id='lineItemAction'><button type="button" id="deleteLineItem" class="btn btn-danger"><i class="fa fa-minus"></i></button></td>
+	</tr>
+<% end %>
+
+</table>
+    <div class="form-group">
+        <div class="col-md-12">
+            <%= submit_tag "Сохранить", class: 'btn btn-primary pull-right' %>
+        </div>
+    </div>
+<% end %>
+<script>
+	$('document').ready(function(){
+
+		var counter = $('#lineItems tr').last().attr('data-index');
+
+		if (counter >= 0) {
+			var previousLineItem = $('#lineItems tr').last();
+			var newLineItem = previousLineItem.clone();
+
+			createLineItem(newLineItem, previousLineItem);
+		} else {
+			counter = 0;
+		}
+
+		$(document).on('click', '#addLineItem', function(){
+			var previousLineItem = $(this).closest("tr");
+			var newLineItem = previousLineItem.clone();
+
+			createLineItem(newLineItem, previousLineItem);
+		})
+
+		$(document).on('click', '#deleteLineItem', function(){
+			$(this).closest("tr").remove();
+		})
+
+		function createLineItem(lineItem, previousLineItem) {
+			counter++;
+
+			lineItem.find("#product_id").attr('name', 'line_items[products[product_' + counter + '[product_id]]]');
+			lineItem.find("#product_id").val($("#product_id option:first").val());
+			lineItem.find("#quantity").attr('name', 'line_items[products[product_' + counter + '[quantity]]]');
+			lineItem.find("#quantity").attr('value', 1);
+
+
+			if (lineItem.find('#lineItemAction button').attr('id') == 'deleteLineItem') {
+				lineItem.find("#deleteLineItem").attr('class', 'btn btn-primary').html('<i class="fa fa-plus"></i>');
+				lineItem.find("#deleteLineItem").attr("id","addLineItem");
+			} else if (lineItem.find('#lineItemAction button').attr('id') == 'addLineItem') {
+				previousLineItem.find("#addLineItem").attr('class', 'btn btn-danger').html('<i class="fa fa-minus"></i>');
+				previousLineItem.find("#addLineItem").attr("id","deleteLineItem");
+			}
+
+			lineItem.attr("data-index", counter);
+			$('#lineItems').append(lineItem);
+			}
+	})
+</script>

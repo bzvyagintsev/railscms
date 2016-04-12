@@ -22,7 +22,7 @@ class Admin::PagesCategoriesController < Admin::BaseController
 
 		    respond_to do |format|
 		      if @pages_category.save
-		        format.html { redirect_to admin_pages_category_path(@pages_category), :flash => { success: "Страница успешно создана"} }
+		        format.html { redirect_to admin_pages_categories_path, :flash => { success: "Страница успешно создана"} }
 		        format.json { render :show, status: :created, location: @pages_category }
 		      else
 		        format.html { render :new }
@@ -33,9 +33,9 @@ class Admin::PagesCategoriesController < Admin::BaseController
 
 		def update
 		    respond_to do |format|
-		      if @pages_category.update(page_params)
+		      if @pages_category.update(pages_category_params)
 
-		        format.html { redirect_to admin_pages_category_path(@pages_category), :flash => { success: "Страница успешно обновлена"} }
+		        format.html { redirect_to admin_pages_categories_path, :flash => { success: "Страница успешно обновлена"} }
 		        format.json { render :show, status: :created, location: @pages_category }
 		      else
 		        format.html { render :new }

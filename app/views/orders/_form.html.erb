@@ -1,0 +1,38 @@
+<%= form_for(@order, html: {class: "form-horizontal"}) do |f| %>
+    <% if @order.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+            <h4><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+            <ul>
+                <% @order.errors.full_messages.each do |message| %>
+                    <li>
+                        <%= message %>
+                    </li>
+                    <% end %>
+            </ul>
+        </div>
+         
+        <% end %>
+
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">ФИО</label>
+                <div class="col-md-10">
+                    <%= f.text_field :name, class: 'form-control' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Email</label>
+                <div class="col-md-10">
+                    <%= f.text_field :email, class: 'form-control' %>
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+                    <i class=""></i> Продолжить
+                    <% end %>
+            </div>
+            <%= link_to cart_path, class: '' do %>
+            <span>← Вернуться в корзину</span>
+                <% end %>
+
+<% end %>

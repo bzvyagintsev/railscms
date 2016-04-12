@@ -1,0 +1,37 @@
+<% if line_item.product %>
+<tr>
+    <td>
+        <%= link_to line_item.product do %>
+            <%= image_tag(line_item.product.cover.url(:thumb)) if line_item.product.cover? %>
+                <% end %>
+    </td>
+    <td>
+        <%= link_to line_item.product.title, line_item.product %>
+    </td>
+    <td>
+        <%= number_to_currency_rub(line_item.product.price) %>
+    </td>
+    <td>
+        <%= line_item.quantity %>
+    </td>
+    <td>
+        <%= number_to_currency_rub(line_item.total_price) %>
+    </td>
+    <td>
+        <%= button_to "Удалить", line_item, method: :delete, class: 'btn btn-link line-item-delete' %>
+    </td>
+</tr>
+<% else %>
+<tr>
+    <td>
+        <p>Добавленный Вами товар удалён из магазина</p>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+        <%= button_to "Удалить", line_item, method: :delete, class: 'btn btn-link line-item-delete' %>
+    </td>
+</tr>
+<% end %>

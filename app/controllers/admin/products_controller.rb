@@ -1,9 +1,14 @@
 class Admin::ProductsController < Admin::BaseController
 
 		before_action :set_product, only: [:show, :edit, :update, :destroy]
+ 		# before_action :ensure_not_referenced_by_any_line_item, only: [:destroy_multiple]
+
 
 		def index
-			@products = Product.all.paginate(:per_page => 2, :page => params[:page])
+			@all_products = Product.all.paginate(:per_page => 2, :page => params[:page])
+			@active_products = Product.active.paginate(:per_page => 2, :page => params[:page])
+			@not_active_products = Product.not_active.paginate(:per_page => 2, :page => params[:page])
+
 		end
 
 		def show
@@ -22,7 +27,7 @@ class Admin::ProductsController < Admin::BaseController
 
 		    respond_to do |format|
 		      if @product.save
-		        format.html { redirect_to admin_product_path(@product), :flash => { success: "Товар успешно создан"} }
+		        format.html { redirect_to admin_products_path, :flash => { success: "Товар успешно создан"} }
 		        format.json { render :show, status: :created, location: @product }
 		      else
 		        format.html { render :new }
@@ -35,7 +40,7 @@ class Admin::ProductsController < Admin::BaseController
 		    respond_to do |format|
 		      if @product.update(product_params)
 
-		        format.html { redirect_to admin_product_path(@product), :flash => { success: "Товар успешно обновлен"} }
+		        format.html { redirect_to admin_products_path, :flash => { success: "Товар успешно обновлен"} }
 		        format.json { render :show, status: :created, location: @product }
 		      else
 		        format.html { render :new }
@@ -56,7 +61,6 @@ class Admin::ProductsController < Admin::BaseController
 		def destroy_multiple
 			if params[:products].present?
 				Product.destroy(params[:products])
-
 				respond_to do |format|
 				 format.html { redirect_to admin_products_path, :flash => { danger: "Товары удалены"}  }
 				 format.json { head :no_content }
@@ -72,7 +76,7 @@ class Admin::ProductsController < Admin::BaseController
 		private
 
 		def product_params
-			params.require(:product).permit(:title, :products_category_id, :price, :description, :cover, :active, :slug, :seo_title, :seo_description)
+			params.require(:product).permit(:title, :products_category_id, :price, :description, :length, :height, :width, :weight, :cover, :active, :slug, :seo_title, :seo_description)
 		end
 
 			# Поиск страницы по friendly_id и редирект с id на friendly_id
@@ -81,5 +85,19 @@ class Admin::ProductsController < Admin::BaseController
 		    # @product = Product.friendly.find(params[:id])
 		    # redirect_to action: :show, id: @product.friendly_id, status: 301 unless @product.friendly_id == params[:id] 
 		end
+
+		# убеждаемся в отсутствии товарных позиций, ссылающихся на данный товар
+		# def ensure_not_referenced_by_any_line_item
+		# 	@products = Product.find(params[:products])
+		# 	if @products.each do |p| 
+		# 		p.line_items.empty?
+		# 		return true 
+		# 	end
+				
+		# 	else
+		# 		flash[:danger] = "С некоторыми товарами связаны товарные позиции"
+		# 		return false
+		# 	end
+		# end
 
 end

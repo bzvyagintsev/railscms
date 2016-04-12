@@ -24,7 +24,7 @@ module Admin
 
 		    respond_to do |format|
 		      if @page.save
-		        format.html { redirect_to admin_page_path(@page), :flash => { success: "Страница успешно создана"} }
+		        format.html { redirect_to admin_pages_path, :flash => { success: "Страница успешно создана"} }
 		        format.json { render :show, status: :created, location: @page }
 		      else
 		        format.html { render :new }
@@ -37,7 +37,7 @@ module Admin
 		    respond_to do |format|
 		      if @page.update(page_params)
 
-		        format.html { redirect_to admin_page_path(@page), :flash => { success: "Страница успешно обновлена"} }
+		        format.html { redirect_to admin_pages_path, :flash => { success: "Страница успешно обновлена"} }
 		        format.json { render :show, status: :created, location: @page }
 		      else
 		        format.html { render :new }

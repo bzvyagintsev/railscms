@@ -39,13 +39,42 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Описание</label>
                         <div class="col-md-10">
-                            <%= f.text_area :description, class: 'form-control' %>
+                            <%= f.text_area :description, rows: 5,class: 'form-control' %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">Размеры (Д х В х Ш)</label>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <%= f.text_field :length, class: 'form-control' %>
+                                </div>
+                                <div class="col-md-4">
+                                    <%= f.text_field :height, class: 'form-control' %>
+                                </div>
+                                <div class="col-md-4">
+                                    <%= f.text_field :width, class: 'form-control' %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">Вес</label>
+                        <div class="col-md-10">
+                            <%= f.text_field :weight, class: 'form-control' %>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Обложка</label>
                         <div class="col-md-10">
                             <%= f.file_field :cover %>
+                                <p class="help-block">
+                                    <% if @product.cover? %>
+                                        <%= image_tag(@product.cover.url(:thumb),  class: "thumbnail") %>
+                                            <% else %>
+                                                Изображение еще не загружено
+                                                <% end %>
+                                </p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -60,13 +89,13 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">SEO title</label>
                         <div class="col-md-10">
-                            <!-- f.text_field :seo_title, class: 'form-control'  -->
+                            <%= f.text_field :seo_title, class: 'form-control' %>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">SEO description</label>
                         <div class="col-md-10">
-                            <!-- f.text_area :seo_description, class: 'form-control' -->
+                            <%= f.text_area :seo_description, class: 'form-control' %>
                         </div>
                     </div>
                 </div>

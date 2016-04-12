@@ -22,7 +22,7 @@ class Admin::ProductsCategoriesController < Admin::BaseController
 
 		    respond_to do |format|
 		      if @products_category.save
-		        format.html { redirect_to admin_products_category_path(@products_category), :flash => { success: "Категория успешно создана"} }
+		        format.html { redirect_to admin_products_categories_path, :flash => { success: "Категория успешно создана"} }
 		        format.json { render :show, status: :created, location: @products_category }
 		      else
 		        format.html { render :new }
@@ -35,7 +35,7 @@ class Admin::ProductsCategoriesController < Admin::BaseController
 		    respond_to do |format|
 		      if @products_category.update(products_category_params)
 
-		        format.html { redirect_to admin_products_category_path(@products_category), :flash => { success: "Категория успешно обновлена"} }
+		        format.html { redirect_to admin_products_categories_path, :flash => { success: "Категория успешно обновлена"} }
 		        format.json { render :show, status: :created, location: @products_category }
 		      else
 		        format.html { render :new }
@@ -72,7 +72,7 @@ class Admin::ProductsCategoriesController < Admin::BaseController
 		private
 
 		def products_category_params
-			params.require(:products_category).permit(:title, :description, :cover, :slug)
+			params.require(:products_category).permit(:title, :description, :cover, :slug, :seo_title, :seo_description)
 		end
 
 			# Поиск страницы по friendly_id и редирект с id на friendly_id

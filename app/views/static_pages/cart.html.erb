@@ -1,0 +1,35 @@
+<h1>Корзина</h1>
+<div class="cart">
+    <% if  @cart.line_items.count != 0 %>
+        <table class="table">
+            <tr>
+                <th>Изображение</th>
+                <th>Название</th>
+                <th>Цена шт.</th>
+                <th>Количество</th>
+                <th>Итого</th>
+                <th>Удалить</th>
+            </tr>
+            <%= render(@cart.line_items) %>
+        </table>
+
+        <div class="pull-right">
+            <div class="form-group">
+                <div><span>Общая стоимость:</span>
+                    <%= number_to_currency_rub(@cart.total_price) %>
+                </div>
+                <div><span>Общий объём:</span>
+                    <%= v_for(@cart.total_v) %>
+                </div>
+                <div><span>Общий вес:</span>
+                    <%= weight_for(@cart.total_kg) %>
+                </div>
+            </div>
+            <div class="form-group">
+                <%= button_to "Перейти к оформлению", new_order_path, method: :get, class: 'btn btn-primary' %>
+            </div>
+        </div>
+        <% else %>
+            <p>Ваша корзина пуста! Вернитесь на <a href="<%= root_path %>">главную страницу</a>, чтобы продолжить покупки.</p>
+        <% end %>
+</div>

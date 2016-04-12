@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
  
   mount Ckeditor::Engine => '/ckeditor'
+
+  # Admin
   namespace :admin do
     root "static_pages#dashboard"
     
@@ -28,15 +30,33 @@ Rails.application.routes.draw do
       end
     end    
 
-    get 'settings' => 'my_settings#index', as: :settings
-    put 'settings' => 'my_settings#update'
+    resources :orders do
+     collection do
+        delete 'destroy_multiple'
+      end
+    end
+
+    get 'settings', to: 'my_settings#index', as: :settings
+    put 'settings', to: 'my_settings#update'
   end
 
+  # Front
   resources :pages, only: [:show, :index]
   resources :products, only: [:show, :index]
   resources :products_categories, only: [:show, :index]
 
-  root "pages#index"
+  resources :line_items
+  # resources :carts
+
+  resources :orders, only: [:new, :create]
+
+  # Static pages
+  get 'cart', to: 'static_pages#cart', as: :cart
+  get 'about', to: 'static_pages#about', as: :about
+  get 'contacts', to: 'contacts#new', as: :contacts
+  post 'contacts', to: "contacts#create"
+
+  root "static_pages#home"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

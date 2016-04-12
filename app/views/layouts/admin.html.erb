@@ -8,44 +8,55 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
-    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+        <%= javascript_include_tag 'application' %>
+            <%= csrf_meta_tags %>
 </head>
 
 <body>
     <%= render 'admin/layouts/header' %>
-        <div class="col-md-3">
-            <div class="list-group">
-                <%= link_to 'Панель управления', admin_root_path, class: "list-group-item" %>
-                    <%= link_to 'Страницы', admin_pages_path, class: "list-group-item" %>
-                        <%= link_to 'Категории страниц', admin_pages_categories_path, class: "list-group-item" %>
-                            <%= link_to 'Товары', admin_products_path, class: "list-group-item" %>
-                                <%= link_to 'Категории товаров', admin_products_categories_path, class: "list-group-item" %>
-                                    <%= link_to 'Настройки', admin_settings_path, class: "list-group-item" %>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="container-fluid">
-                <% flash.each do |type, content| %>
-                    <% if content.respond_to?('each') 
+        <%= render 'admin/layouts/sidebar' %>
+            <div class="content">
+                <%= breadcrumbs style: :bootstrap, autoroot: false, display_single_fragment: true %>
+                    <div class="col-md-12">
+                        <% flash.each do |type, content| %>
+                            <% if content.respond_to?('each') 
         content.each do |item| %>
-                        <%= render 'layouts/alert', 
+                                <%= render 'layouts/alert', 
                 type: type,
                 content: item %>
-                            <% end %>
-                                <% else %>
-                                    <%= render 'layouts/alert', 
+                                    <% end %>
+                                        <% else %>
+                                            <%= render 'layouts/alert', 
                 type: type,
                 content: content %>
-                                        <% end %>
-                                            <% end %>
-                                                <%= yield %>
-                                                    <%= render 'admin/layouts/footer' %>
+                                                <% end %>
+                                                    <% end %>
+                                                        <%= yield %>
+                                                            <%= render 'admin/layouts/footer' %>
+                    </div>
             </div>
-        </div>
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+            <script>
+            if (localStorage.state == 'active') {
+                $('.sidebar').addClass('sidebar_active');
+                $('.content').addClass('content_active');
+            }
+            $('#sidebar-toggle').click(function() {
+                if ($('.sidebar').hasClass('sidebar_active')) {
+                    $('.sidebar').removeClass('sidebar_active');
+                    $('.content').removeClass('content_active');
+                    localStorage.removeItem('state');
+                } else {
+                    $('.sidebar').addClass('sidebar_active');
+                    $('.content').addClass('content_active');
+                    localStorage.setItem('state', 'active');
+                }
+            })
+            </script>
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+            <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </body>
 
 </html>

@@ -1,0 +1,31 @@
+<%= form_for( @contact, html: {class: "contact-form"} ) do |f| %>
+    <% if @contact.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+            <ul>
+                <% @contact.errors.full_messages.each do |message| %>
+                    <li>
+                        <%= message %>
+                    </li>
+                    <% end %>
+            </ul>
+        </div>
+        <% end %>
+            <div class="form-group">
+                <%= f.text_field :name, type: "text", class: "form-control", placeholder: "Ваше имя", :required => true %>
+            </div>
+            <div class="form-group">
+                <%= f.text_field :email,  type: "email", class: "form-control",  placeholder: "Ваш email", :required => true %>
+            </div>
+            <div class="form-group">
+                <%= f.text_area :message, class: "form-control",  placeholder: "Ваше сообщение", rows: "6", :required => true  %>
+            </div>
+            <div class="hidden">
+                <%= f.text_field :filter, class: "form-control",  placeholder: "Оставьте это поле пустым" %>
+            </div>
+            <div class="form-group">
+                <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+                    <i class=""></i>Отправить
+                    <% end %>
+            </div>
+            <% end %>

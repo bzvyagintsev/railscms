@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405211639) do
+ActiveRecord::Schema.define(version: 20160410092307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -31,6 +37,24 @@ ActiveRecord::Schema.define(version: 20160405211639) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "cart_id"
+    t.integer  "order_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "quantity",   default: 1
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 0
+  end
 
   create_table "pages", force: :cascade do |t|
     t.string   "title"
@@ -68,6 +92,13 @@ ActiveRecord::Schema.define(version: 20160405211639) do
     t.string   "slug"
     t.datetime "created_at",                                                  null: false
     t.datetime "updated_at",                                                  null: false
+    t.decimal  "length",               precision: 8, scale: 2
+    t.decimal  "height",               precision: 8, scale: 2
+    t.decimal  "width",                precision: 8, scale: 2
+    t.decimal  "weight",               precision: 8, scale: 2
+    t.string   "brand"
+    t.string   "seo_title"
+    t.string   "seo_description"
   end
 
   create_table "products_categories", force: :cascade do |t|
@@ -75,14 +106,16 @@ ActiveRecord::Schema.define(version: 20160405211639) do
     t.text     "description"
     t.string   "slug"
     t.string   "cover"
-    t.boolean  "active",         default: true
+    t.boolean  "active",          default: true
     t.integer  "parent_id"
-    t.integer  "lft",                           null: false
-    t.integer  "rgt",                           null: false
-    t.integer  "depth",          default: 0,    null: false
-    t.integer  "children_count", default: 0,    null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "lft",                            null: false
+    t.integer  "rgt",                            null: false
+    t.integer  "depth",           default: 0,    null: false
+    t.integer  "children_count",  default: 0,    null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "seo_title"
+    t.string   "seo_description"
   end
 
   add_index "products_categories", ["lft"], name: "index_products_categories_on_lft", using: :btree

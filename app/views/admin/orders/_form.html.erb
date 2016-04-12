@@ -1,0 +1,101 @@
+<% breadcrumb :admin_orders %>
+<h1>Новый заказ</h1>
+<%= form_tag '/admin/orders', multipart: true, class: "form-horizontal" do |f| %>
+    <% if @order.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+            <h4><%= pluralize(@order.errors.count, "error") %> prohibited this page from being saved:</h4>
+            <ul>
+                <% @order.errors.full_messages.each do |message| %>
+                    <li>
+                        <%= message %>
+                    </li>
+                    <% end %>
+            </ul>
+        </div>
+        <% end %>
+ <div class="form-group">
+    <label for="" class="col-md-2 control-label">ФИО</label>
+	<div class="col-md-10">
+        <%= text_field_tag 'order[name]', 'ФИО', class: 'form-control' %>
+	</div>
+</div>
+
+ <div class="form-group">
+    <label for="" class="col-md-2 control-label">Email</label>
+	<div class="col-md-10">
+        <%= text_field_tag 'order[email]', 'email', class: 'form-control' %>
+	</div>
+</div>
+ <div class="form-group">
+    <label for="" class="col-md-2 control-label">Статус</label>
+	<div class="col-md-10">
+        		<td><%= select_tag 'order[status]', options_from_collection_for_select(Order.statuses, 'first', 'first'), selected: 'progress', class: 'form-control' %></td>
+	</div>
+</div>
+
+<!--  <div class="form-group">
+    <label for="" class="col-md-2 control-label">Товар</label>
+	<div class="col-md-5">
+       <%= select_tag 'line_item', options_from_collection_for_select(Product.all, 'id', 'title'), prompt: 'Выберите товар', class: 'form-control' %>
+	</div>
+	<div class="col-md-5">
+        <%= text_field_tag 'quantity', '1', class: 'form-control' %>
+	</div>
+</div> -->
+
+
+<h2>Товары</h2>
+
+<table id="lineItems" class="table table-hover">
+	<tr>
+		<th>Название</th>
+		<th>Количество</th>
+		<th>Добавить</th>
+	</tr>
+
+	<tr>
+		<!-- <td><%= select_tag '', options_from_collection_for_select(Product.all, 'id', 'title'), prompt: 'Выберите товар', class: 'form-control', id: 'lineItem' %></td> -->
+		<td><%= select_tag 'line_items[products[product_1[product_id]]]', options_from_collection_for_select(Product.all, 'id', 'title'), prompt: 'Выберите товар', class: 'form-control', id: 'product_id' %></td>
+		<td><%= text_field_tag 'line_items[products[product_1[quantity]]]', '1', class: 'form-control', id: 'quantity' %></td>
+		<td><button type="button" id="addLineItem" class="btn btn-primary"><i class="fa fa-plus"></i></button></td>
+	</tr>
+
+</table>
+    <div class="form-group">
+        <div class="col-md-12">
+            <%= submit_tag "Сохранить", class: 'btn btn-primary pull-right' %>
+        </div>
+    </div>
+<% end %>
+<script>
+	// var lineItem = $();
+	var counter = 1;
+
+	$(document).on('click', '#addLineItem', function(){
+		counter++;
+
+		var newLineItem = $(this).closest("tr").clone()
+		// newLineItem.find("select").attr('name', '');
+
+		newLineItem.find("#product_id").attr('name', 'line_items[products[product_' + counter + '[product_id]]]');
+		newLineItem.find("#quantity").attr('name', 'line_items[products[product_' + counter + '[quantity]]]');
+
+
+		$(this).removeClass('btn-primary').addClass('btn-danger').html('<i class="fa fa-minus"></i>');
+		$(this).attr("id","deleteLineItem");
+
+
+		$('#lineItems').append(newLineItem);
+
+	})
+
+	$(document).on('click', '#deleteLineItem', function(){
+		$(this).closest("tr").remove();
+	})
+	// $(document).on('change', '#line_items_products_product_product_id', function() {
+	//   var id = $(this).children(":selected").attr("value");
+	//   $(this).attr('name', 'line_items[products[product_' + counter + '[product_id]]]');
+	//   $(this).closest('#quantity').attr('name', 'line_items[products[product_' + counter + '[quantity]]]');
+	  // counter++;
+	// });
+</script>

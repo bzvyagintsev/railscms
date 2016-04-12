@@ -25,4 +25,17 @@ module ApplicationHelper
 			data.html_safe
 		end
 	end
+
+	def weight_for weight
+		if weight
+			weight.to_s + ' ' + 'кг'
+		end
+	end
+
+	def v_for v
+		if v
+			(v.to_s + ' ' + 'м<sup>3</sup>').html_safe
+		end
+	end
+
 end

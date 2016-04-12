@@ -91,6 +91,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    mail_form (1.5.1)
+      actionmailer (>= 3.2, < 5)
+      activemodel (>= 3.2, < 5)
     meta-tags (2.1.0)
       actionpack (>= 3.0.0)
     mime-types (3.0)
@@ -188,6 +191,7 @@ DEPENDENCIES
   gretel
   jbuilder (~> 2.0)
   jquery-rails
+  mail_form
   meta-tags
   mini_magick
   pg (~> 0.15)

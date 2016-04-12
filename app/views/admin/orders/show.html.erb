@@ -1,0 +1,55 @@
+<% breadcrumb :admin_orders %>
+<h1>Заказ №<%= @order.id %></h1>
+<div class="form-horizontal">
+ <div class="form-group">
+    <label for="" class="col-md-2">ФИО</label>
+	<div class="col-md-10">
+		<%= @order.name %>
+	</div>
+</div>
+
+ <div class="form-group">
+    <label for="" class="col-md-2">Email</label>
+	<div class="col-md-10">
+		<%= @order.email %>
+	</div>
+</div>
+ <div class="form-group">
+    <label for="" class="col-md-2">Вес</label>
+	<div class="col-md-10">
+		<%= weight_for @order.total_kg %>
+	</div>
+</div>
+ <div class="form-group">
+    <label for="" class="col-md-2">Объём</label>
+	<div class="col-md-10">
+		<%= v_for @order.total_v %>
+	</div>
+</div>
+ <div class="form-group">
+    <label for="" class="col-md-2">Сумма</label>
+	<div class="col-md-10">
+		<%= number_to_currency_rub @order.total_price %>
+	</div>
+</div>
+</div>
+<h2>Товары</h2>
+
+<table class="table table-hover">
+	<tr>
+		<th>Изображение</th>
+		<th>Название</th>
+		<th>Цена шт.</th>
+		<th>Количество</th>
+		<th>Итого</th>
+	</tr>
+	<% @order.line_items.each do |l| %>
+	<tr>
+		<td><%= image_tag l.product.cover.url(:admin_thumb) %></td>
+		<td><%= l.product.title %></td>	
+		<td><%= number_to_currency_rub l.product.price %></td>	
+		<td><%= l.quantity %></td>	
+		<td><%= number_to_currency_rub l.total_price %></td>	
+	</tr>
+	<% end %>
+</table>
