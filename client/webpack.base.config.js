@@ -9,10 +9,13 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
 
-    context: __dirname + '/client',
-    entry: './js/route.js',
+    context: path.resolve(__dirname),
+    entry: {
+        admin: './admin.js',
+        front: './js/route.js',
+    },
     output: {
-        path: __dirname + "/app/assets/javascripts",
+        path: path.resolve("./app/assets/javascripts"),
         publicPath: '/assets/',
         filename: '[name].js',
     },
@@ -41,7 +44,11 @@ module.exports = {
                 test: require.resolve("jquery"),
 
                 loader: "expose?$!expose?jQuery"
-            },
+            }, {
+                test: /\.(ttf|eot|svg|woff(2)?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
+            }
+
 
         ]
     },
@@ -66,7 +73,7 @@ module.exports = {
 
     ],
     resolve: {
-
+        root: path.resolve('/home/bogdan/myprojects/railscms'),
         modulesDirectories: ['web_modules', 'node_modules'],
         extensions: ['', '.js', 'css'],
     }

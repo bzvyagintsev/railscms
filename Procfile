@@ -1,3 +1,2 @@
-
 web: rails s
-webpack: webpack --watch --config client/webpack.base.config.js
+webpack: sudo webpack --watch --config client/webpack.base.config.js

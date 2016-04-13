@@ -1,37 +1,38 @@
 {
-    "name": "railscms",
-    "version": "1.0.0",
-    "description": "Webpack bundle for rails CMS",
-    "main": "main.js",
-    "dependencies": {
-        "angularjs-rails-resource": "finelineprototyping/angularjs-rails-resource",
-        "extract-text-webpack-plugin": "^1.0.1",
-        "masonry-layout": "^4.0.0",
-        "webpack": "^1.12.11"
-    },
-    "devDependencies": {
-        "babel-core": "^6.4.0",
-        "babel-loader": "^6.2.1",
-        "babel-preset-es2015": "^6.3.13",
-        "babel-preset-react": "^6.3.13",
-        "css-loader": "^0.23.1",
-        "expose-loader": "^0.7.1",
-        "file-loader": "^0.8.5",
-        "imagesloaded": "^4.1.0",
-        "precss": "^1.4.0",
-        "rucksack-css": "^0.8.5",
-        "style-loader": "^0.13.0"
-    },
-    "scripts": {
-        "test": "test"
-    },
-    "repository": {
-        "type": "git",
-        "url": "none"
-    },
-    "keywords": [
-        "none"
-    ],
-    "author": "b.zvyagintsev",
-    "license": "BSD-2-Clause"
+  "name": "railscms",
+  "version": "1.0.0",
+  "description": "Webpack bundle for rails CMS",
+  "main": "main.js",
+  "dependencies": {
+    "angularjs-rails-resource": "finelineprototyping/angularjs-rails-resource",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "masonry-layout": "^4.0.0",
+    "webpack": "^1.12.11"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.0",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "css-loader": "^0.23.1",
+    "expose-loader": "^0.7.1",
+    "file-loader": "^0.8.5",
+    "imagesloaded": "^4.1.0",
+    "postcss-loader": "^0.8.2",
+    "precss": "^1.4.0",
+    "rucksack-css": "^0.8.5",
+    "style-loader": "^0.13.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "b.zvyagintsev",
+  "license": "BSD-2-Clause"
 }
