@@ -15,12 +15,14 @@ export default function($scope, $state, $stateParams, $window, $filter, Product,
             $scope.productSeoDescription = $scope.product.seoDescription;
             $scope.productActive = $scope.product.active;
             $scope.cover = $scope.product.thumb.url;
-            $scope.productCategory = $scope.product.category.id
+            $scope.productCategory = $scope.product.category;
+
         }
     });
 
     productsCategory.query().then(function(results) {
         $scope.categories = results;
+
     });
 
     $scope.categoryPath = function(array) {
@@ -76,20 +78,47 @@ export default function($scope, $state, $stateParams, $window, $filter, Product,
     };
 
     $scope.updateProduct = function() {
-        Product.get($scope.product.id).then(function(product) {
-            product.title = $scope.productTitle;
-            product.price = $scope.productPrice;
-            product.description = $scope.productDescription;
-            product.weight = $scope.productWeight;
-            product.length = $scope.productLength;
-            product.height = $scope.productHeight;
-            product.width = $scope.productWidth;
-            product.active = $scope.productActive;
-            product.seo_title = $scope.productSeoTitle;
-            product.seo_description = $scope.productSeoDescription;
+        //     Product.get($scope.product.id).then(function(product) {
+        //         product.title = $scope.productTitle;
+        //         product.price = $scope.productPrice;
+        //         product.description = $scope.productDescription;
+        //         product.weight = $scope.productWeight;
+        //         product.length = $scope.productLength;
+        //         product.height = $scope.productHeight;
+        //         product.width = $scope.productWidth;
+        //         product.active = $scope.productActive;
+        //         product.seo_title = $scope.productSeoTitle;
+        //         product.seo_description = $scope.productSeoDescription;
 
-            product.update();
+        //         product.update();
+        //     });
+
+
+
+        $scope.upload = Upload.upload({
+            url: '/admin/products' + $stateParams.id,
+            method: 'PUT',
+            data: {
+                product: {
+                    'title': $scope.productTitle,
+                    'price': $scope.productPrice,
+                    'products_category_id': $scope.productCategory,
+                    'description': $scope.productDescription,
+                    'weight': $scope.productWeight,
+                    'length': $scope.productLength,
+                    'height': $scope.productHeight,
+                    'width': $scope.productWidth,
+                    'active': $scope.productActive,
+                    'seo_title': $scope.productSeoTitle,
+                    'seo_description': $scope.productSeoDescription,
+                    'cover': file
+
+                }
+            },
+
         });
+
     };
+
 
 };

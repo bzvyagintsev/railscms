@@ -31,7 +31,14 @@
             <div class="form-group">
                 <label for="" class="col-md-2 control-label">Категория</label>
                 <div class="col-md-10">
-                    <select name="product_category" id="" class="form-control"></select>
+                    <!--  <select name="product[category]" ng-model="productCategory" id="product_category" class="form-control" convert-to-number="">
+                        <option ng-repeat="category in categories | orderBy:'selfAndAncestors[0].title'" value="{{category.id}}">
+                            {{categoryPath(category.selfAndAncestors)}}
+                        </option>
+                    </select> -->
+                    <select name="product[category]" id="" ng-model="productCategory" class="form-control" ng-options="category as categoryPath(category.selfAndAncestors) for category in categories | orderBy:'selfAndAncestors[0].title' track by category.id">
+                        <option value="">--- Без категории ---</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">

@@ -24,6 +24,7 @@ json.products @all_products do |product|
 
   json.category do
     if product.products_category.present?
+      json.id product.products_category.id
       json.title product.products_category.title 
       json.url url_for(product.products_category) 
     else

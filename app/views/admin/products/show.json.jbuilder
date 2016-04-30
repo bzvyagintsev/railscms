@@ -24,8 +24,8 @@ json.product do
 
   json.category do
     if @product.products_category.present?
-      json.title @product.products_category.title
       json.id @product.products_category.id
+      json.title @product.products_category.title
       json.url url_for(@product.products_category)
     else
       json.title 'Без категории' 
