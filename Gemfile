@@ -36,6 +36,8 @@ gem 'will_paginate-bootstrap'
 gem 'awesome_nested_set'
 gem 'mail_form'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'devise'
+gem 'rails_12factor', group: :production
 # gem 'non-stupid-digest-assets'
 
 # Use ActiveModel has_secure_password
