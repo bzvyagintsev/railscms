@@ -1,7 +1,7 @@
 class Admin::OrdersController < Admin::BaseController
 
 	before_action :set_order, only: [:show, :edit, :update, :destroy]
-
+ 
 		def index
 			@orders = Order.all.paginate(:per_page => 25, :page => params[:page])
 		end

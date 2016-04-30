@@ -1,0 +1,32 @@
+defaults: &defaults
+  settings: 'settings yml'
+  seo:
+    title: "YML TITLE"
+    description: "Default SEO description"
+    
+
+  mail:
+    host: "site.ru"
+    from: "info@site.ru"
+    address: "smtp.yandex.ru"
+    port: 587
+    user_name: 'user_name'
+    password: '12345678'
+
+  base:
+    site_name: "Rails CMS"
+    email: "example@site.ru"
+    tel: "+7 (123) 456-78-90"
+    second_tel: "+7 (123) 456-78-90"
+    address: 'Москва, город Зеленоград 123456'
+    work_time: 'Ежедневно с 8:00 до 20:00'
+    info: 'Интернет магазин'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

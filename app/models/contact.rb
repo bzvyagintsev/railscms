@@ -8,8 +8,8 @@ class Contact < MailForm::Base
 	def headers
 	    {
 	      :subject => "Сообщение с сайта",
-	      :to => MySettings['base.email'],
-	      :from => MySettings['base.email']
+	      :to => Settings['base.email'],
+	      :from => Settings['base.email']
 	    }
 	end
 

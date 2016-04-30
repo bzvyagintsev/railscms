@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 
 <head>
     <title>Rails CMS</title>
     <!-- Latest compiled and minified CSS -->
     <!-- Optional theme -->
-    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
         <%= javascript_include_tag 'admin' %>
             <%= csrf_meta_tags %>
@@ -13,27 +12,30 @@
 
 <body>
     <%= render 'admin/layouts/header' %>
+    <div class="wrapper">
         <%= render 'admin/layouts/sidebar' %>
             <div class="content">
-                <%= breadcrumbs style: :bootstrap, autoroot: false, display_single_fragment: true %>
-                    <div class="col-md-12">
-                        <% flash.each do |type, content| %>
-                            <% if content.respond_to?('each') 
+                <div ncy-breadcrumb></div>
+                <div class="col-md-12">
+                    <% flash.each do |type, content| %>
+                        <% if content.respond_to?('each') 
         content.each do |item| %>
-                                <%= render 'layouts/alert', 
+                            <%= render 'layouts/alert', 
                 type: type,
                 content: item %>
-                                    <% end %>
-                                        <% else %>
-                                            <%= render 'layouts/alert', 
+                                <% end %>
+                                    <% else %>
+                                        <%= render 'layouts/alert', 
                 type: type,
                 content: content %>
+                                            <% end %>
                                                 <% end %>
-                                                    <% end %>
-                                                        <%= yield %>
-                                                            <%= render 'admin/layouts/footer' %>
-                    </div>
+                                                    <%= yield %>
+                                                        <%= render 'admin/layouts/footer' %>
+                </div>
             </div>
+            </div>
+            <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
             <script>
             if (localStorage.state == 'active') {
                 $('.sidebar').addClass('sidebar_active');
@@ -50,9 +52,10 @@
                     localStorage.setItem('state', 'active');
                 }
             })
+
+            
             </script>
             <!-- Latest compiled and minified JavaScript -->
-            <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </body>
 

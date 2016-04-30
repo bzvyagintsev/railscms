@@ -1,43 +1,44 @@
 Rails.application.routes.draw do
- 
-  mount Ckeditor::Engine => '/ckeditor'
 
   # Admin
   namespace :admin do
-    root "static_pages#dashboard"
+    root "static_pages#index"
+
     
     resources :pages do
      collection do
-        delete 'destroy_multiple'
+        post 'destroy_multiple'
       end
     end
 
     resources :pages_categories do
      collection do
-        delete 'destroy_multiple'
+        post 'destroy_multiple'
       end
     end
 
     resources :products do
      collection do
-        delete 'destroy_multiple'
+        post 'destroy_multiple'
       end
     end
 
     resources :products_categories do
      collection do
-        delete 'destroy_multiple'
+        post 'destroy_multiple'
       end
     end    
 
     resources :orders do
      collection do
-        delete 'destroy_multiple'
+        post 'destroy_multiple'
       end
     end
 
-    get 'settings', to: 'my_settings#index', as: :settings
-    put 'settings', to: 'my_settings#update'
+    get 'settings', to: 'settings#index', as: :settings
+    patch 'settings', to: 'settings#update', defaults: {format: :json}
+    put 'settings', to: 'settings#update', defaults: {format: :json}
+
   end
 
   # Front

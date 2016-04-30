@@ -1,0 +1,38 @@
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.table > tbody > tr > th {
+    vertical-align: middle;
+}
+
+.table {
+    .table__checkbox {
+        text-align: center;
+        width: 35px;
+    }
+    .table__id {
+        text-align: center;
+        width: 40px;
+    }
+    .table__cover {
+        text-align: center;
+        width: 65px;
+    }
+    .table__status {
+        width: 92px;
+    }
+    td.table__status {
+        text-align: center;
+    }
+    .table__link {
+        text-align: center;
+        width: 80px;
+    }
+    .table__price {
+        width: 100px;
+    }
+    td.table__price {
+        text-align: right;
+    }
+}

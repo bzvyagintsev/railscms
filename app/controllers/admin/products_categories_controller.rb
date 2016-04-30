@@ -3,7 +3,7 @@ class Admin::ProductsCategoriesController < Admin::BaseController
 		before_action :set_products_category, only: [:show, :edit, :update, :destroy]
 
 		def index
-			@products_categories = ProductsCategory.all.paginate(:per_page => 2, :page => params[:page])
+			@products_categories = ProductsCategory.all.paginate(:per_page => 20, :page => params[:page])
 		end
 
 		def show
@@ -72,7 +72,7 @@ class Admin::ProductsCategoriesController < Admin::BaseController
 		private
 
 		def products_category_params
-			params.require(:products_category).permit(:title, :description, :cover, :slug, :seo_title, :seo_description)
+			params.require(:products_category).permit(:title, :description, :parent_id, :cover, :active, :slug, :seo_title, :seo_description)
 		end
 
 			# Поиск страницы по friendly_id и редирект с id на friendly_id

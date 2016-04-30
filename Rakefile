@@ -5,63 +5,69 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
+# rake tmp:cache:clear
 # !rake rails_cms:default_settings
-# MySettings.destroy('seo.seo_title') - чтобы удалить
+# Settings.destroy('seo.seo_title') - чтобы удалить
 
 namespace :rails_cms do
 	desc "Default settings for website"
 	task default_settings: :environment do
 
 		# SEO settings
-		if !MySettings['seo.title']
-			MySettings['seo.title'] = "Default SEO title"
+		if !Settings['seo.title']
+			Settings['seo.title'] = "Default SEO title"
 		end
 
-		if !MySettings['seo.description']
-			MySettings['seo.description'] = "Default SEO description"
+		if !Settings['seo.description']
+			Settings['seo.description'] = "Default SEO description"
 		end
 
 		# Yandex mail settings
-		if !MySettings['mail.host']
-			MySettings['mail.host'] = "site.ru"
+		if !Settings['mail.host']
+			Settings['mail.host'] = "site.ru"
 		end
-		if !MySettings['mail.from']
-			MySettings['mail.from'] = "info@site.ru"
+		if !Settings['mail.from']
+			Settings['mail.from'] = "info@site.ru"
 		end
-		if !MySettings['mail.address']
-			MySettings['mail.address'] = "smtp.yandex.ru"
+		if !Settings['mail.address']
+			Settings['mail.address'] = "smtp.yandex.ru"
 		end
-		if !MySettings['mail.port']
-	    	MySettings['mail.port'] = 587
+		if !Settings['mail.port']
+	    	Settings['mail.port'] = 587
 		end
-		if !MySettings['mail.user_name']
-   			MySettings['mail.user_name'] = 'user_name'
+		if !Settings['mail.user_name']
+   			Settings['mail.user_name'] = 'user_name'
    		end
-   		if !MySettings['mail.password']
-   			MySettings['mail.password'] = '12345678'
+   		if !Settings['mail.password']
+   			Settings['mail.password'] = '12345678'
    		end
 
    		# Base settings
-		if !MySettings['base.site_name']
-			MySettings['base.site_name'] = "Rails CMS"
+		if !Settings['base.site_name']
+			Settings['base.site_name'] = "Rails CMS"
 		end
-		if !MySettings['base.email']
-			MySettings['base.email'] = "example@site.ru"
+		if !Settings['base.email']
+			Settings['base.email'] = "example@site.ru"
 		end
-		if !MySettings['base.tel']
-			MySettings['base.tel'] = "+7 (123) 456-78-90"
+		if !Settings['base.tel']
+			Settings['base.tel'] = "+7 (123) 456-78-90"
 		end
-		if !MySettings['base.second_tel']
-	    	MySettings['base.second_tel'] = "+7 (123) 456-78-90"
+		if !Settings['base.second_tel']
+	    	Settings['base.second_tel'] = "+7 (123) 456-78-90"
 		end
-		if !MySettings['base.address']
-   			MySettings['base.address'] = 'Москва, город Зеленоград 123456'
+		if !Settings['base.address']
+   			Settings['base.address'] = 'Москва, город Зеленоград 123456'
    		end
-   		if !MySettings['base.work_time']
-   			MySettings['base.work_time'] = 'Ежедневно с 8:00 до 20:00'
+   		if !Settings['base.work_time']
+   			Settings['base.work_time'] = 'Ежедневно с 8:00 до 20:00'
    		end
-   		if !MySettings['base.info']
-   			MySettings['base.info'] = 'Интернет магазин'
+   		if !Settings['base.info']
+   			Settings['base.info'] = 'Интернет магазин'
+   		end
+
+   		# Additional
+   		if !Settings['addtl.scripts']
+   			Settings['addtl.scripts'] = ''
    		end
 
 	end

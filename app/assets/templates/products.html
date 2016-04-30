@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-inline">
+            <div class="form-group">
+                <a ui-sref=".new" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Новый товар</a>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchProduct">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--   <div class="col-md-2">
+        <div class="form-group">
+            <a ui-sref=".new" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Новый товар</a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchProduct">
+            </div>
+        </div>
+    </div> -->
+    <div class="col-md-6">
+        <div class="form-inline pull-right">
+            <div class="form-group">
+                <div class="text-right">
+                    <span ng-show="checkedProducts.ids.length >= 1">Выбранно товаров: {{checkedProducts.ids.length}}</span>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <button class="btn btn-danger btn-sm" ng-click="deleteProducts()" ng-disabled="checkedProducts.ids.length < 1"><i class="fa fa-trash-o"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="table-responsive">
+    <table class="table table-bordered
+ table-hover">
+        <tr>
+            <th class="table__checkbox">
+                <input type="checkbox" id="checkAll" ng-checked="checkedAll" ng-click="checkAllToggle()">
+            </th>
+            <th class="table__id">
+                <a href ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                    #
+                    <i ng-if="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'id' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th class="table__cover">
+                Обложка
+            </th>
+            <th>
+                <a href ng-click="sortType = 'title'; sortReverse = !sortReverse">
+                    Название 
+                    <i ng-if="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'title' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th>
+                <a href ng-click="sortType = 'category'; sortReverse = !sortReverse">
+                    Категория
+                    <i ng-if="sortType == 'category' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'category' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th class="table__price">
+                <a href ng-click="sortType = 'price'; sortReverse = !sortReverse">
+                    Цена
+                    <i ng-if="sortType == 'price' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'price' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th class="table__status">
+                <a href ng-click="sortType = 'active'; sortReverse = !sortReverse">
+                    Статус 
+                    <i ng-if="sortType == 'active' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'active' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th class="table__link">
+                На сайте
+            </th>
+        </tr>
+        <tr ng-repeat="product in products | orderBy:sortType:sortReverse | filter:searchProduct">
+            <td class="table__checkbox">
+                <input type="checkbox" checklist-model="checkedProducts.ids" checklist-value="product.id" class="check">
+            </td>
+            <td class="table__id">
+                {{ product.id }}
+            </td>
+            <td class="table__cover">
+                <img ng-src="{{product.thumb.url}}" />
+            </td>
+            <td>
+                <a ui-sref=".edit({id:{{ product.id }}})">{{ product.title }}</a>
+            </td>
+            <td>
+                {{ product.category.title }}
+            </td>
+            <td class="table__price">
+                {{ product.price }} <i class="fa fa-rub"></i>
+            </td>
+            <td class="table__status">
+                <span ng-click="statusToggle(product)" ng-init="productStatus = product.active" ng-show="product.active == true" class="label label-success status-toggle">Включено</span>
+                <span ng-click="statusToggle(product)" ng-init="productStatus = product.active" ng-show="product.active == false" class="label label-danger status-toggle">Выключено</span>
+            </td>
+            <td class="table__link">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <a href="{{ product.url }}" class="btn btn-link btn"><i class="fa fa-eye"></i></a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="form-group">
+</div>
+<script>
+// $("#checkAll").click(function() {
+//     $(".check").prop('checked', $(this).prop('checked'));
+// });
+</script>

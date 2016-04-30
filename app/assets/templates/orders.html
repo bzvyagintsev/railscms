@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1 style="margin-top: 0px;">Заказы</h1>
+    </div>
+    <!--     <div class="col-md-6">
+        <div class="form-inline pull-right">
+            <div class="form-group">
+                <a href="/admin/products/new" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+            </div>
+        </div>
+    </div> -->
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            <a ui-sref=".new" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Новый заказ</a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Поиск" ng-model="searchOrder">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1 pull-right">
+        <div class="form-group text-right">
+            <button class="btn btn-danger" ng-click="deleteOrder()"><i class="fa fa-trash-o"></i></button>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th class="table__checkbox">
+                <input type="checkbox" id="checkAll">
+            </th>
+            <th class="table__id">
+                <a href ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                    #
+                    <i ng-if="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'id' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th>
+                <a href ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                    ФИО 
+                    <i ng-if="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'name' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th>
+                <a href ng-click="sortType = 'date'; sortReverse = !sortReverse">
+                    Дата создания
+                    <i ng-if="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'date' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th>
+                <a href ng-click="sortType = 'price'; sortReverse = !sortReverse">
+                    Сумма
+                    <i ng-if="sortType == 'price' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'price' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th class="table__status">
+                <a href ng-click="sortType = 'status'; sortReverse = !sortReverse">
+                    Статус 
+                    <i ng-if="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'status' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th>
+                Изменить
+            </th>
+        </tr>
+        <tr ng-repeat="order in orders | orderBy:sortType:sortReverse | filter:searchOrder">
+            <td class="table__checkbox">
+                <input type="checkbox" class="check">
+            </td>
+            <td class="table__id">
+                {{ order.id }}
+            </td>
+            <td>
+                <a ui-sref=".edit({id:{{ order.id }}})">{{ order.name }}</a>
+            </td>
+            <td>
+                {{ order.createdAt }}
+            </td>
+            <td>
+                {{ order.totalPrice }} <i class="fa fa-rub"></i>
+            </td>
+            <td class="table__status">
+                <span ng-if="order.status === 'progress'" class="label label-primary">{{ order.status }}</span>
+                <span ng-if="order.status == 'completed'" class="label label-success">{{ order.status }}</span>
+                <span ng-if="order.status == 'canceled'" class="label label-danger">{{ order.status }}</span>
+                <span ng-if="order.status == 'paid'" class="label label-info">{{ order.status }}</span>
+            </td>
+            <td>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <a href="{{ order.url }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="form-group">
+</div>
+<script>
+$("#checkAll").click(function() {
+    $(".check").prop('checked', $(this).prop('checked'));
+});
+</script>

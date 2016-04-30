@@ -3,12 +3,10 @@ class Admin::ProductsController < Admin::BaseController
 		before_action :set_product, only: [:show, :edit, :update, :destroy]
  		# before_action :ensure_not_referenced_by_any_line_item, only: [:destroy_multiple]
 
-
 		def index
-			@all_products = Product.all.paginate(:per_page => 2, :page => params[:page])
+			@all_products = Product.all.paginate(:per_page => 50, :page => params[:page])
 			@active_products = Product.active.paginate(:per_page => 2, :page => params[:page])
 			@not_active_products = Product.not_active.paginate(:per_page => 2, :page => params[:page])
-
 		end
 
 		def show
@@ -28,7 +26,7 @@ class Admin::ProductsController < Admin::BaseController
 		    respond_to do |format|
 		      if @product.save
 		        format.html { redirect_to admin_products_path, :flash => { success: "Товар успешно создан"} }
-		        format.json { render :show, status: :created, location: @product }
+		        format.json { render @product, status: :created, location: @product }
 		      else
 		        format.html { render :new }
 		        format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -68,7 +66,7 @@ class Admin::ProductsController < Admin::BaseController
 			else
 				respond_to do |format|
 				 format.html { redirect_to admin_products_path, :flash => { danger: "Вы не выбрали ни одного товара"}  }
-				 format.json { head :no_content }
+				 format.json { render json: 'Ошибка', status: :unprocessable_entity }
 				end
 			end
 		end

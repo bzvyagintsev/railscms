@@ -4,20 +4,24 @@
 <footer>
     <div class="container">
         <div class="col-md-3">
-        <a href="tel:<%= MySettings['base.tel'] %>"><%= MySettings['base.tel'] %></a>
-                <p>
-                    <%= MySettings['base.work_time'] %>
-                </p>
-                <p>
-                <a href="mailto:<%= MySettings['base.email'] %>"><%= MySettings['base.email'] %></a>
-                    
-                </p>
-                <p>
-                    <%= MySettings['base.address'] %>
-                </p>
-                <p>
-                    <%= MySettings['base.info'] %>
-                </p>
+            <a href="tel:<%= Settings['base.tel'] %>">
+                <%= Settings['base.tel'] %>
+            </a>
+            <p>
+                <%= Settings['base.work_time'] %>
+            </p>
+            <p>
+                <a href="mailto:<%= Settings['base.email'] %>">
+                    <%= Settings['base.email'] %>
+                </a>
+            </p>
+            <p>
+                <%= Settings['base.address'] %>
+            </p>
+            <p>
+                <%= Settings['base.info'] %>
+            </p>
         </div>
     </div>
 </footer>
+<%= raw Settings['addtl.scripts'] %>

@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -23,18 +23,20 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
-gem 'ckeditor'
+# gem 'ckeditor'
 gem "mini_magick"
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "gretel"
 gem 'meta-tags'
 gem 'sitemap_generator'
 gem 'whenever', require: false
-gem "rails-settings-cached", "~> 0.4.0"
+gem "rails-settings-cached"
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
 gem 'awesome_nested_set'
 gem 'mail_form'
+gem 'rack-cors', :require => 'rack/cors'
+# gem 'non-stupid-digest-assets'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

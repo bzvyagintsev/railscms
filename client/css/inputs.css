@@ -1,0 +1,6 @@
+input[required] {
+    background: url('required.svg');
+    background-repeat: no-repeat;
+    background-size: 8px;
+    background-position: right .75rem center;
+}

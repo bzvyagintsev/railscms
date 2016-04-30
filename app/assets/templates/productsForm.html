@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1>Редактирование</h1>
+    </div>
+    <div class="col-md-6">
+        <div class="pull-right">
+            <button class="btn btn-primary" ng-click="updateProduct()"><i class="fa fa-save"></i></button>
+        </div>
+    </div>
+</div>
+<form action="" class="form-horizontal">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" data-target="#base">Основные</a></li>
+        <li><a data-toggle="tab" data-target="#seo">SEO</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="base" class="tab-pane fade in active">
+            <h3>Основные</h3>
+            <div class="form-group">
+                <label for="title" class="col-md-2 control-label">Название</label>
+                <div class="col-md-10">
+                    <input ng-model="productTitle" type="text" name="title" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price" class="col-md-2 control-label">Цена</label>
+                <div class="col-md-10">
+                    <input ng-model="productPrice" type="text" name="price" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Категория</label>
+                <div class="col-md-10">
+                    <select name="product_category" id="" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Описание</label>
+                <div class="col-md-10">
+                    <textarea ng-model="productDescription" name="description" class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Размеры (Д х В х Ш)</label>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input ng-model="productLength" type="text" name="length" class='form-control'>
+                        </div>
+                        <div class="col-md-4">
+                            <input ng-model="productHeight" type="text" name="height" class='form-control'>
+                        </div>
+                        <div class="col-md-4">
+                            <input ng-model="productWidth" type="text" name="width" class='form-control'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Вес</label>
+                <div class="col-md-4">
+                    <input ng-model="productWeight" type="text" name="weight" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Обложка</label>
+                <div class="col-md-10">
+                    <input type="file" name="cover">
+                    <p class="help-block">
+                        <img ng-src="{{ product.thumb.url }}" class="thumbnail">
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Опубликовать</label>
+                <div class="col-md-10">
+                    <input type="checkbox" name="active" checked="checked">
+                </div>
+            </div>
+        </div>
+        <div id="seo" class="tab-pane fade">
+            <h3>SEO</h3>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">SEO title</label>
+                <div class="col-md-10">
+                    <input ng-model="productSeoTitle" type="text" name="seo_title" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">SEO description</label>
+                <div class="col-md-10">
+                    <textarea ng-model="productSeoDescription" name="seo_description" id="" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

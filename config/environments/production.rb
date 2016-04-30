@@ -78,15 +78,15 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Настройки почты / Email settings
-  config.action_mailer.default_url_options = {:host => MySettings['mail.host'], :from => MySettings['mail.from']}
+  config.action_mailer.default_url_options = {:host => Settings['mail.host'], :from => Settings['mail.from']}
 
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-    :address              => MySettings['mail.address'],
-    :port                 => MySettings['mail.port'],
-    :user_name            => MySettings['mail.user_name'],
-    :password             => MySettings['mail.password'],
+    :address              => Settings['mail.address'],
+    :port                 => Settings['mail.port'],
+    :user_name            => Settings['mail.user_name'],
+    :password             => Settings['mail.password'],
     :authentication       => "plain",
     :enable_starttls_auto => true
   }

@@ -1,0 +1,37 @@
+
+json.settings	 do
+	json.set! 'seo.title',  @settings['seo.title']
+	json.set! 'seo.description',	 @settings['seo.description']
+	json.set! 'mail.host',			@settings['mail.host']
+	json.set! 'mail.from',		@settings['mail.from']
+	json.set! 'mail.address',	 @settings['mail.address']
+	json.set! 'mail.port',	 @settings['mail.port']
+	json.set! 'mail.user_name',	 @settings['mail.user_name']
+	json.set! 'mail.password',	 @settings['mail.password']
+	json.set! 'base.site_name',	 @settings['base.site_name']
+	json.set! 'base.email',	 @settings['base.email']
+	json.set! 'base.tel',	 @settings['base.tel']
+	json.set! 'base.second_tel',	 @settings['base.second_tel']
+	json.set! 'base.address',	 @settings['base.address']
+	json.set! 'base.work_time',	 @settings['base.work_time']
+	json.set! 'base.info',	 @settings['base.info']
+	json.set! 'addtl.scripts',	 @settings['addtl.scripts']
+
+
+# 	json.seo_title @settings['seo.title']
+# 	json.seo_description @settings['seo.description']
+# 	json.mail_host		@settings['mail.host']
+# 	json.mail_from	@settings['mail.from']
+# 	json.mail_address @settings['mail.address']
+# 	json.mail_port @settings['mail.port']
+# 	json.mail_user_name @settings['mail.user_name']
+#   json.mail_password @settings['mail.password']
+# 	json.base_site_name @settings['base.site_name']
+# 	json.base_email @settings['base.email']
+# 	json.base_tel @settings['base.tel']
+# 	json.base_second_tel @settings['base.second_tel']
+# 	json.base_address @settings['base.address']
+#   json.base_work_time @settings['base.work_time']
+#   json.base_info @settings['base.info']
+
+end

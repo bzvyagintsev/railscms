@@ -1,0 +1,119 @@
+<h1>Настройки</h1>
+<div class="form-group">
+    <button ng-click="saveSettings()" class="btn btn-primary"><i class="fa fa-save"></i> Сохранить</button>
+</div>
+<div class="form-horizontal">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" data-target="#base">Основные</a></li>
+        <li><a data-toggle="tab" data-target="#mail">Почта</a></li>
+        <li><a data-toggle="tab" data-target="#seo">SEO</a></li>
+        <li><a data-toggle="tab" data-target="#analytics">Дополнительно</a></li>
+    </ul>
+    <div class="tab-content">
+        <br>
+        <div id="base" class="tab-pane fade in active">
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Название сайта</label>
+                <div class="col-md-10">
+                    <input type="text" ng-model="baseSiteName" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Email</label>
+                <div class="col-md-10">
+                    <input type="email" ng-model="baseEmail" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Телефон</label>
+                <div class="col-md-10">
+                    <input type="tel" ng-model="baseTel" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Второй телефон</label>
+                <div class="col-md-10">
+                    <input type="tel" ng-model="baseSecondTel" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Адрес</label>
+                <div class="col-md-10">
+                    <input type="text" ng-model="baseAddress" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Рабочее время</label>
+                <div class="col-md-10">
+                    <input type="text" ng-model="baseWorkTime" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Информация</label>
+                <div class="col-md-10">
+                    <textarea type="text" ng-model="baseInfo" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div id="mail" class="tab-pane fade in">
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Хост (сайт)</label>
+                <div class="col-md-10">
+                    <input type="url" ng-model="mailHost" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Адрес отправителя</label>
+                <div class="col-md-10">
+                    <input type="email" ng-model="mailFrom" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Адрес почтового сервера</label>
+                <div class="col-md-10">
+                    <input type="url" ng-model="mailAddress" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Порт</label>
+                <div class="col-md-10">
+                    <input type="text" ng-model="mailPort" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Имя пользователя</label>
+                <div class="col-md-10">
+                    <input type="text" ng-model="mailUserName" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Пароль</label>
+                <div class="col-md-10">
+                    <input type="password" ng-model="mailPassword" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div id="seo" class="tab-pane fade in">
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">SEO Title</label>
+                <div class="col-md-10">
+                    <input type="text" ng-model="seoTitle" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">SEO Description</label>
+                <div class="col-md-10">
+                    <textarea type="text" ng-model="seoDescription" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div id="analytics" class="tab-pane fade in">
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Коды веб-сервисов</label>
+                <div class="col-md-10">
+                    <textarea type="text" ng-model="addtlScripts" class="form-control" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

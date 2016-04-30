@@ -1,39 +1,61 @@
 <nav class="sidebar">
     <div class="sidebar__list">
         <div class="sidebar__item">
-            <%= link_to admin_root_path do %>
-                <i class="fa fa-tachometer sidebar__item-icon"></i> <span class="sidebar__item-text">Панель управления</span>
-                <% end %>
+            <a ui-sref="root">
+                <i class="fa fa-tachometer sidebar__item-icon"></i> <span class="sidebar__item-text">Сводка</span>
+            </a>
         </div>
         <div class="sidebar__item">
-            <%= link_to admin_pages_path do %>
-                <i class="fa fa-file sidebar__item-icon"></i> <span class="sidebar__item-text">Страницы</span>
-                <% end %>
+            <a ui-sref="catalog.products">
+                <i class="fa fa-tags sidebar__item-icon"></i> <span class="sidebar__item-text">Каталог</span>
+            </a>
         </div>
         <div class="sidebar__item">
-            <%= link_to admin_pages_categories_path do %>
-                <i class="fa fa-list sidebar__item-icon"></i> <span class="sidebar__item-text">Категории страниц</span>
-                <% end %>
-        </div>
-        <div class="sidebar__item">
-            <%= link_to admin_products_path do %>
-                <i class="fa fa-tags sidebar__item-icon"></i> <span class="sidebar__item-text">Товары</span>
-                <% end %>
-        </div>
-        <div class="sidebar__item">
-            <%= link_to admin_products_categories_path do %>
-                <i class="fa fa-list sidebar__item-icon"></i> <span class="sidebar__item-text">Категории товаров</span>
-                <% end %>
-        </div>
-        <div class="sidebar__item">
-            <%= link_to admin_orders_path do %>
+            <a ui-sref="orders">
                 <i class="fa fa-shopping-cart sidebar__item-icon"></i> <span class="sidebar__item-text">Заказы</span>
-                <% end %>
+            </a>
         </div>
-        <div class="sidebar__item">
-            <%= link_to admin_settings_path do %>
+         <div class="sidebar__item">
+            <a ui-sref="settings">
                 <i class="fa fa-cog sidebar__item-icon"></i> <span class="sidebar__item-text">Настройки</span>
-                <% end %>
+            </a>
         </div>
+        <!-- <div class="sidebar__item">
+    <%= link_to admin_root_path do %>
+        <i class="fa fa-tachometer sidebar__item-icon"></i> <span class="sidebar__item-text">Панель управления</span>
+        <% end %>
+</div>
+<div class="sidebar__item">
+    <%= link_to admin_pages_path do %>
+        <i class="fa fa-file sidebar__item-icon"></i> <span class="sidebar__item-text">Страницы</span>
+        <% end %>
+</div>
+<div class="sidebar__item">
+    <%= link_to admin_pages_categories_path do %>
+        <i class="fa fa-list sidebar__item-icon"></i> <span class="sidebar__item-text">Категории страниц</span>
+        <% end %>
+</div>
+<div class="sidebar__item">
+    <%= link_to admin_products_path do %>
+        <i class="fa fa-tags sidebar__item-icon"></i> <span class="sidebar__item-text">Товары</span>
+        <% end %>
+</div>
+<div class="sidebar__item">
+    <%= link_to admin_products_categories_path do %>
+        <i class="fa fa-list sidebar__item-icon"></i> <span class="sidebar__item-text">Категории товаров</span>
+        <% end %>
+</div>
+<div class="sidebar__item">
+    <%= link_to admin_orders_path do %>
+        <i class="fa fa-shopping-cart sidebar__item-icon"></i> <span class="sidebar__item-text">Заказы</span>
+        <% end %>
+</div>
+<div class="sidebar__item">
+    <%= link_to admin_settings_path do %>
+        <i class="fa fa-cog sidebar__item-icon"></i> <span class="sidebar__item-text">Настройки</span>
+        <% end %>
+</div>
+ -->
     </div>
 </nav>
+

@@ -1,3 +1,11 @@
 @import './bootstrap.min.css';
 @import './bootstrap-theme.css';
 @import './sidebar.css';
+@import './table.css';
+@import './dl.css';
+@import './style.css';
+@import './tabs.css';
+@import './inputs.css';
+@import './labels.css';
+@import './btn-outline.css';
+@import './forms.css'

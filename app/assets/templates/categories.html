@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-inline">
+            <div class="form-group">
+                <a ui-sref=".new" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Новая категория</a> </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchCategory">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-inline pull-right">
+            <div class="form-group">
+                <div class="text-right">
+                    <span ng-show="checkedCategories.ids.length >= 1">Выбранно категорий: {{checkedCategories.ids.length}}</span>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <button class="btn btn-danger btn-sm" ng-click="deleteCategories()" ng-disabled="checkedCategories.ids.length < 1"><i class="fa fa-trash-o"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th class="table__checkbox">
+                <input type="checkbox" id="checkAll" ng-checked="checkedAll" ng-click="checkAllToggle()">
+            </th>
+            <th class="table__id">
+                <a href ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                    #
+                    <i ng-if="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'id' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th>
+                <a href ng-click="sortType = 'selfAndAncestors[0].title'; sortReverse = !sortReverse">
+                    Название 
+                    <i ng-if="sortType == 'selfAndAncestors[0].title' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'selfAndAncestors[0].title' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th class="table__status">
+                <a href ng-click="sortType = 'active'; sortReverse = !sortReverse">
+                    Статус 
+                    <i ng-if="sortType == 'active' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-if="sortType == 'active' && sortReverse" class="fa fa-caret-up"></i>
+                </a>
+            </th>
+            <th class="table__link">
+                На сайте
+            </th>
+        </tr>
+        <tr ng-repeat="category in categories | orderBy:sortType:sortReverse | filter:searchCategory">
+            <td class="table__checkbox">
+                <input type="checkbox" checklist-model="checkedCategories.ids" checklist-value="category.id" class="check">
+            </td>
+            <td class="table__id">
+                {{ category.id }}
+            </td>
+            <td>
+                <a ui-sref=".edit({id:{{ category.id }}})">
+                    <span ng-repeat="a in category.selfAndAncestors">{{a.title}}{{$last ? '' : ' > '}}</span>
+                </a>
+                <!-- {{category.selfAndAncestors}} -->
+                <!-- {{categoryFullPath(category)}} -->
+            </td>
+            <td class="table__status">
+                <span ng-click="statusToggle(category)" ng-init="categoryStatus = category.active" ng-show="category.active == true" class="label label-success status-toggle">Включено</span>
+                <span ng-click="statusToggle(category)" ng-init="categoryStatus = category.active" ng-show="category.active == false" class="label label-danger status-toggle">Выключено</span>
+            </td>
+            <td class="table__link">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <a href="{{ category.url }}" class="btn btn-link"><i class="fa fa-eye"></i></a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

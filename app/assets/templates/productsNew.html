@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1>Новый товар</h1>
+    </div>
+    <div class="col-md-6">
+        <div class="form-inline pull-right">
+            <div class="form-group">
+                <label for="product[active]" class="control-label">Опубликовать </label>
+                <input type="checkbox" ng-model="productActive" ng-init="productActive = true" name="product[active]" ng-checked="productActive">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" ng-click="createProduct(cover)" ng-disabled="product.$invalid"><i class="fa fa-save"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<form name="product" class="form-horizontal">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" data-target="#base">Основные</a>
+        </li>
+        <li>
+            <a data-toggle="tab" data-target="#seo">SEO</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="base" class="tab-pane fade in active">
+            <h3>Основные</h3>
+            <div class="form-group">
+                <label for="title" class="col-md-2 control-label">Название</label>
+                <div class="col-md-10">
+                    <input ng-model="productTitle" type="text" name="product[title]" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price" class="col-md-2 control-label">Цена</label>
+                <div class="col-md-10">
+                    <input ng-model="productPrice" type="text" name="product[price]" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Категория</label>
+                <div class="col-md-10">
+                    <select name="product[category]" id="product_category" ng-model="productCategory" class="form-control">
+                        <option ng-repeat="category in categories | orderBy:'selfAndAncestors[0].title'" value="{{category.id}}">
+                            <!-- <span ng-repeat="a in category.selfAndAncestors">{{a.title}}{{$last ? '' : ' > '}}</span> -->
+                            {{categoryPath(category.selfAndAncestors)}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Описание</label>
+                <div class="col-md-10">
+                    <textarea ng-model="productDescription" name="product[description]" class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Размеры (Д х В х Ш)</label>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input ng-model="productLength" type="text" name="product[length]" class='form-control'>
+                        </div>
+                        <div class="col-md-4">
+                            <input ng-model="productHeight" type="text" name="product[height]" class='form-control'>
+                        </div>
+                        <div class="col-md-4">
+                            <input ng-model="productWidth" type="text" name="product[width]" class='form-control'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Вес</label>
+                <div class="col-md-4">
+                    <input ng-model="productWeight" type="text" name="product[weight]" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Обложка</label>
+                <div class="col-md-10">
+                    <div class="btn btn-default" name="product[cover]" ngf-select ng-model="cover">Выбрать файл</div>
+                    <br/>
+                    <div class="help-block">
+                        <div class="thumbnail" style="width: 105px; height: 105px;">
+                            <img ngf-src="cover" ngf-background="cover" ngf-resize="{width: 100, height: 100, quality: 0.5}" />
+                            <!-- <img ng-src="{{ product.thumb.url }}" class="thumbnail"> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Опубликовать</label>
+                <div class="col-md-10">
+                    <input type="checkbox" ng-model="productActive" ng-init="productActive = true" name="product[active]" ng-checked="productActive">
+                </div>
+            </div>
+        </div>
+        <div id="seo" class="tab-pane fade">
+            <h3>SEO</h3>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">SEO title</label>
+                <div class="col-md-10">
+                    <input ng-model="productSeoTitle" type="text" name="product[seo_title]" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">SEO description</label>
+                <div class="col-md-10">
+                    <textarea ng-model="productSeoDescription" name="product[seo_description]" id="" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
