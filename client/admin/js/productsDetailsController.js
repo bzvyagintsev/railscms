@@ -71,8 +71,30 @@ export default function($scope, $state, $stateParams, $window, $filter, Product,
                     'cover': file
 
                 }
-            },
+            }
 
+        });
+
+        $scope.uploadAddtlImgs = Upload.upload({
+            url: '/admin/products',
+            method: 'POST',
+            data: {
+                product: {
+                    'title': $scope.productTitle,
+                    'price': $scope.productPrice,
+                    'products_category_id': $scope.productCategory,
+                    'description': $scope.productDescription,
+                    'weight': $scope.productWeight,
+                    'length': $scope.productLength,
+                    'height': $scope.productHeight,
+                    'width': $scope.productWidth,
+                    'active': $scope.productActive,
+                    'seo_title': $scope.productSeoTitle,
+                    'seo_description': $scope.productSeoDescription,
+                    'cover': file
+
+                }
+            }
         });
 
     };

@@ -3,11 +3,10 @@ class LineItem < ActiveRecord::Base
   belongs_to :product
   belongs_to :cart
 
-
   def total_price
     if product
       if product.price
-  	   product.price * quantity.to_i
+        product.price * quantity.to_i
       end
     else
       return 0

@@ -1,7 +1,7 @@
-import Stickyfill from './stickyfill.js';
+// import Stickyfill from './stickyfill.js';
 
-export default function() {
-    $(document).ready(function() {
-        $('#sticky-sidebar').Stickyfill();
-    })
-};
+// export default function() {
+//     $(document).ready(function() {
+//         $('#sticky-sidebar').Stickyfill();
+//     })
+// };

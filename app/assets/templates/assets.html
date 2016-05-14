@@ -1,0 +1,34 @@
+<div class="form-inline">
+    <div class="form-group">
+        <button type="button" class="btn btn-primary btn-sm" name="asset[file]" ngf-select="uploadAssets($files)" multiple="multiple" ng-model="files" ng-disabled="btnDisabled">
+            <!-- {{ files ? 'Выбрано: ' + files.length : 'Загрузить файлы' }} -->
+            {{ files ? 'Загрузка...' : 'Загрузить файлы' }}
+        </button>
+        <!--      <br/>
+        <div class="help-block">
+            <div class="thumbnail" style="width: 105px; height: 105px;">
+                <img ngf-src="file" ngf-background="file" ngf-resize="{width: 100, height: 100, quality: 0.5}" />
+            </div>
+        </div> -->
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input type="text" class="form-control input-sm" placeholder="Поиск" ng-model="searchAsset">
+        </div>
+    </div>
+    <!--     <div class="form-group">
+        <button class="btn btn-primary" ng-click="assetCreate(file)" ng-disabled="file == null">Загрузить</button>
+    </div> -->
+</div>
+<br>
+<div class="row">
+    <div class="col-md-2" ng-repeat="asset in assets | orderBy:'id' | filter:searchAsset">
+        <div class="thumbnail storage_thumbnail" ng-click="">
+            <img ng-src="{{asset.asset.thumb.url}} " alt=" ">
+        </div>
+        <div class="caption ">
+            {{asset.title}}
+        </div>
+    </div>
+</div>

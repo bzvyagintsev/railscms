@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     end
 
     resources :products do
-     collection do
+      resources :assets, only: [:new, :create, :edit, :update]
+     
+      collection do
         post 'destroy_multiple'
       end
     end
@@ -30,6 +32,12 @@ Rails.application.routes.draw do
     end    
 
     resources :orders do
+     collection do
+        post 'destroy_multiple'
+      end
+    end
+    
+    resources :assets, defaults: {format: :json} do
      collection do
         post 'destroy_multiple'
       end

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  
+
   include CurrentCart
-  
+
   before_action :set_cart
   before_action :set_products_categories
 
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
       title:       title,
       image:       image,
       description: description,
-     }
+    }
 
     options.reverse_merge!(defaults)
 
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_products_categories
-   @products_categories = ProductsCategory.friendly.roots
+    @products_categories = ProductsCategory.friendly.roots
   end
 
   def set_csrf_cookie_for_ng

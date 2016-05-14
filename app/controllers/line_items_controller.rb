@@ -8,13 +8,13 @@ class LineItemsController < ApplicationController
   # GET /line_items
   # GET /line_items.json
   def index
-      # render json: LineItem.all #от ангулара
+    # render json: LineItem.all #от ангулара
   end
 
   # GET /line_items/1
   # GET /line_items/1.json
   def show
-    
+
   end
 
   # GET /line_items/new
@@ -61,7 +61,7 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    @line_item = LineItem.find(params[:id]) 
+    @line_item = LineItem.find(params[:id])
     @line_item.destroy
     respond_to do |format|
       format.html { redirect_to cart_path, :flash => { danger: 'Товарная позиция успешно удалена.'} }
@@ -70,17 +70,17 @@ class LineItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_line_item
-      @line_item = LineItem.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_line_item
+    @line_item = LineItem.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def line_item_params
-      params.require(:line_item).permit(:product_id, :cart_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def line_item_params
+    params.require(:line_item).permit(:product_id, :cart_id)
+  end
 
-    # def product_params
-    #     params.require(:line_item).permit(:product_id)
-    # end
+  # def product_params
+  #     params.require(:line_item).permit(:product_id)
+  # end
 end

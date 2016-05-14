@@ -18,6 +18,8 @@ import productsCategoriesController from './admin/js/productsCategoriesControlle
 import productsDetailsController from './admin/js/productsDetailsController.js';
 import ordersController from './admin/js/ordersController.js';
 import settingsController from './admin/js/settingsController.js';
+import assetsController from './admin/js/assetsController.js';
+
 
 
 let catalog = angular.module('catalog', []);
@@ -25,6 +27,9 @@ catalog.controller('catalogController', catalogController);
 
 let settings = angular.module('settings', []);
 settings.controller('settingsController', settingsController);
+
+let assets = angular.module('assets', []);
+assets.controller('assetsController', assetsController);
 
 let products = angular.module('products', []);
 products.controller('productsController', productsController);
@@ -38,7 +43,7 @@ productsDetails.controller('productsDetailsController', productsDetailsControlle
 let orders = angular.module('orders', []);
 orders.controller('ordersController', ordersController);
 
-let myApp = angular.module('myApp', ['ui.router', 'ngResource', 'rails', 'settings', 'catalog', 'products', 'productsCategories', 'orders', 'productsDetails', 'ncy-angular-breadcrumb', 'checklist-model', 'ngFileUpload']);
+let myApp = angular.module('myApp', ['ui.router', 'ngResource', 'rails', 'settings', 'catalog', 'products', 'productsCategories', 'orders', 'assets', 'productsDetails', 'ncy-angular-breadcrumb', 'checklist-model', 'ngFileUpload']);
 
 myApp.factory('Product', ['railsResourceFactory', function(railsResourceFactory) {
     return railsResourceFactory({
@@ -46,6 +51,7 @@ myApp.factory('Product', ['railsResourceFactory', function(railsResourceFactory)
         name: 'product'
     });
 }]);
+
 myApp.factory('productsCategory', ['railsResourceFactory', function(railsResourceFactory) {
     return railsResourceFactory({
         url: '/admin/products_categories',
@@ -53,12 +59,14 @@ myApp.factory('productsCategory', ['railsResourceFactory', function(railsResourc
         pluralName: 'products_categories'
     });
 }]);
+
 myApp.factory('Order', ['railsResourceFactory', function(railsResourceFactory) {
     return railsResourceFactory({
         url: '/admin/orders',
         name: 'order'
     });
 }]);
+
 myApp.factory('Settings', ['railsResourceFactory', function(railsResourceFactory) {
     return railsResourceFactory({
         url: '/admin/settings',
@@ -66,13 +74,18 @@ myApp.factory('Settings', ['railsResourceFactory', function(railsResourceFactory
     });
 }]);
 
+myApp.factory('Asset', ['railsResourceFactory', function(railsResourceFactory) {
+    return railsResourceFactory({
+        url: '/admin/assets',
+        name: 'asset'
+    });
+}]);
+
 
 myApp.config(function($stateProvider, $urlRouterProvider) {
-    //
-    // For any unmatched url, redirect to /state1
+
     $urlRouterProvider.otherwise("");
-    //
-    // Now set up the states
+
     $stateProvider
         .state('root', {
             url: "",
@@ -98,8 +111,6 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
             ncyBreadcrumb: {
                 label: 'Каталог',
                 force: true,
-                // parent: 'root'
-
             }
         })
         .state('catalog.products', {
@@ -120,7 +131,6 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
                 '@': {
                     templateUrl: "../assets/productsNew.html",
                     controller: 'productsDetailsController'
-
                 }
             },
             ncyBreadcrumb: {
@@ -133,7 +143,6 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
                 '@': {
                     templateUrl: "../assets/productsForm.html",
                     controller: 'productsDetailsController'
-
                 }
             },
             ncyBreadcrumb: {
@@ -182,7 +191,6 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'ordersController',
             ncyBreadcrumb: {
                 label: 'Заказы',
-                // parent: 'root'
             }
         })
         .state('orders.edit', {
@@ -195,41 +203,16 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
             },
             ncyBreadcrumb: {
                 label: '№{{order.id}}',
-                // parent: 'root'
+            }
+        })
+        .state('assets', {
+            url: "/assets",
+            templateUrl: "../assets/assets.html",
+            controller: 'assetsController',
+            ncyBreadcrumb: {
+                label: 'Файлы',
             }
         });
-    // .state('products.details', {
-    //     url: "^/products/:id",
-    //     views: {
-    //         '@': {
-    //             templateUrl: "../assets/productsDetails.html",
-    //             controller: 'productsDetailsController'
-
-    //         }
-    //     },
-    //     ncyBreadcrumb: {
-    //         label: '{{ product.title }}'
-    //     }
-
-    // })
-    // .state('products.details.edit', {
-    //     url: "^/products/:id/edit",
-    //     views: {
-    //         '@': {
-    //             templateUrl: "../assets/productsForm.html",
-    //             controller: 'productsDetailsController'
-
-    //         }
-    //     },
-    //     ncyBreadcrumb: {
-    //         label: 'Редактирование'
-    //     }
-
-    // })
-
-
-
-
 });
 
 export default myApp;

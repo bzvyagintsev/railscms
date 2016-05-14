@@ -20,6 +20,9 @@
             <a data-toggle="tab" data-target="#base">Основные</a>
         </li>
         <li>
+            <a data-toggle="tab" data-target="#images">Изображения</a>
+        </li>
+        <li>
             <a data-toggle="tab" data-target="#seo">SEO</a>
         </li>
     </ul>
@@ -94,6 +97,15 @@
                 <label for="" class="col-md-2 control-label">Опубликовать</label>
                 <div class="col-md-10">
                     <input type="checkbox" ng-model="productActive" ng-init="productActive = true" name="product[active]" ng-checked="productActive">
+                </div>
+            </div>
+        </div>
+        <div id="images" class="tab-pane fade">
+            <h3>Дополнительные изображения</h3>
+            <div class="form-group">
+                <label for="" class="col-md-2 control-label">Изображение</label>
+                <div class="col-md-10">
+                    <input ng-model="" type="text" name="" class="form-control">
                 </div>
             </div>
         </div>
